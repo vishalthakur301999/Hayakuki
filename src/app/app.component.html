@@ -5,10 +5,36 @@
     </div>
     <ul>
       <li>
-        <mat-icon>home</mat-icon>
+        <div *ngIf="collapsedNav; else homeicon">
+          <mat-icon>flight_takeoff</mat-icon>
+        </div>
+        <ng-template #homeicon>
+          Fly
+        </ng-template>
       </li>
       <li>
-        <mat-icon>exit_to_app</mat-icon>
+        <div *ngIf="collapsedNav; else blogicon">
+          <mat-icon>landscape</mat-icon>
+        </div>
+        <ng-template #blogicon>
+          Travel Ideas
+        </ng-template>
+      </li>
+      <li>
+        <div *ngIf="collapsedNav; else loginicon">
+          <mat-icon>login</mat-icon>
+        </div>
+        <ng-template #loginicon>
+          Login
+        </ng-template>
+      </li>
+      <li>
+        <div *ngIf="collapsedNav; else signupicon">
+          <mat-icon>signup</mat-icon>
+        </div>
+        <ng-template #signupicon>
+          Sign Up
+        </ng-template>
       </li>
     </ul>
   </mat-sidenav>

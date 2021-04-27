@@ -1,0 +1,12 @@
+<section class="flex-wrap pa2" style="background-color: #212121">
+  <div *ngFor="let flight of queryResult">
+    <div style="background-color: #313131" class="pa2 w-auto ma3 pa2">
+      <span>{{flight.flightNumber}}</span><br>
+      <span>{{flight.airline}}</span><br>
+      <span>{{flight.deptTime}} - </span>
+      <span>{{flight.arrivalTime}}</span><br>
+      <span>{{flight.duration}}</span><br>
+      <span>{{flight.fare}}</span>
+    </div>
+  </div>
+</section>

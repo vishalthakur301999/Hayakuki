@@ -1,0 +1,69 @@
+<div style="padding-top: 5rem"></div>
+<mat-tab-group>
+  <mat-tab label="Create"><app-adminflightcreate></app-adminflightcreate></mat-tab>
+  <mat-tab label="Edit"> Content 2 </mat-tab>
+  <mat-tab label="Delete"> Content 3 </mat-tab>
+</mat-tab-group>
+<mat-paginator [pageSizeOptions]="[50, 100, 200, 500, 1000]" showFirstLastButtons></mat-paginator>
+<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+
+  <!-- FlightNumber Column -->
+  <ng-container matColumnDef="flightNumber">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Flight Number </th>
+    <td mat-cell *matCellDef="let element"> {{element.flightNumber}} </td>
+  </ng-container>
+  <!-- sourcecode Column -->
+  <ng-container matColumnDef="sourceCode">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Source Apt Code </th>
+    <td mat-cell *matCellDef="let element"> {{element.sourceCode}} </td>
+  </ng-container>
+  <!-- destcode Column -->
+  <ng-container matColumnDef="destCode">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Dest. Apt Code </th>
+    <td mat-cell *matCellDef="let element"> {{element.destCode}} </td>
+  </ng-container>
+  <!-- airline Column -->
+  <ng-container matColumnDef="airline">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Airline </th>
+    <td mat-cell *matCellDef="let element"> {{element.airline}} </td>
+  </ng-container>
+  <!-- duration Column -->
+  <ng-container matColumnDef="duration">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Duration </th>
+    <td mat-cell *matCellDef="let element"> {{element.duration}} </td>
+  </ng-container>
+  <!-- fare Column -->
+  <ng-container matColumnDef="fare">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fare </th>
+    <td mat-cell *matCellDef="let element"> {{element.fare}} </td>
+  </ng-container>
+  <!-- aircrafttype Column -->
+  <ng-container matColumnDef="aircraftType">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> aircraft </th>
+    <td mat-cell *matCellDef="let element"> {{element.aircraftType}} </td>
+  </ng-container>
+  <!-- deptime Column -->
+  <ng-container matColumnDef="deptTime">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Dept. Time</th>
+    <td mat-cell *matCellDef="let element"> {{element.deptTime}} </td>
+  </ng-container>
+  <!-- arrtime Column -->
+  <ng-container matColumnDef="arrivalTime">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Arrival Time</th>
+    <td mat-cell *matCellDef="let element"> {{element.arrivalTime}} </td>
+  </ng-container>
+
+  <!-- edit Column -->
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Edit</th>
+    <td mat-cell *matCellDef="let element"><mat-icon>edit</mat-icon></td>
+  </ng-container>
+  <!-- delete Column -->
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
+    <td mat-cell *matCellDef="let element"><mat-icon>delete</mat-icon></td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

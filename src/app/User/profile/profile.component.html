@@ -1,17 +1,19 @@
 <div class="f-6-ns f1 pa6-ns pa4 fjalla bg-black"> My Profile</div>
-<div class="pt4 pb4 flex justify-center" *ngIf="fieldsetDisabled; else enabled">
-  <button (click)="formToggle()" mat-raised-button color="warn" class="w-100 w-40-ns pa3">Enable Update</button>
-</div>
-<ng-template #enabled>
-  <div class="pt4 pb4 flex justify-center">
-    <button (click)="rld()" mat-raised-button color="accent" class="w-100 w-40-ns pa3">Cancel Update</button>
+<div class="pa4">
+  <div class="pt4 flex justify-center" *ngIf="fieldsetDisabled; else enabled">
+    <button (click)="formToggle()" mat-raised-button color="warn" class="w-100 w-40-ns pa3">Enable Update</button>
   </div>
-</ng-template>
+  <ng-template #enabled>
+    <div class="pt4 flex justify-center">
+      <button (click)="rld()" mat-raised-button color="accent" class="w-100 w-40-ns pa3">Cancel Update</button>
+    </div>
+  </ng-template>
+</div>
 <form #updateForm='ngForm' (ngSubmit)="update(updateForm.value)">
   <fieldset [disabled]="fieldsetDisabled" style="border: none">
 
 <div class="w-100 flex flex-wrap justify-center">
-  <div class="flex w-50-ns w-80-m w-100 h-100 flex-column pr6-ns pl6-ns pt4 pb1 pr4-m pl4-m pr2 pl2">
+  <div class="flex w-50-ns w-80-m w-100 h-100 flex-column pr6-ns pl6-ns pr4-m pl4-m pr2 pl2">
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Enter Your Name</mat-label>
       <input matInput placeholder="name" name="name" [(ngModel)]="name" required>
@@ -38,7 +40,7 @@
       <mat-hint *ngIf="!emailcheck()">Please enter a valid email address</mat-hint>
     </mat-form-field>
   </div>
-  <div class="flex w-50-ns w-80-m w-100 h-100 flex-column pr6-ns pl6-ns pt4 pb1 pr4-m pl4-m pr2 pl2">
+  <div class="flex w-50-ns w-80-m w-100 h-100 flex-column pr6-ns pl6-ns pr4-m pl4-m pr2 pl2">
 
     <mat-form-field appearance="outline" class="w-100">
       <mat-label>Gender</mat-label>
@@ -68,18 +70,17 @@
 
 </div>
 
-<div class="pt3 pb3 flex justify-center" *ngIf="fieldsetDisabled; else change">
+<div class="pl4 pr4">
+  <div class="pt3 pb3 flex justify-center" *ngIf="fieldsetDisabled; else change"></div>
+  <ng-template #change>
+    <div class="pt3 pb3 flex justify-center">
+      <button mat-raised-button color="primary" (click)="updateUserFn(updateForm.value)" class="w-100 w-40-ns pa3">Update</button>
+    </div>
+    <div class="pt3 pb3 flex justify-center">
+      <button mat-raised-button color="warn" (click)="delUserFn()" class="w-100 w-40-ns pa3">Delete Profile</button>
+    </div>
+  </ng-template>
 </div>
-<ng-template #change>
-  <div class="pt3 pb3 flex justify-center">
-    <button mat-raised-button color="primary" (click)="updateUserFn(updateForm.value)" class="w-100 w-40-ns pa3">Update</button>
-  </div>
-  <div class="pt3 pb3 flex justify-center">
-    <button mat-raised-button color="warn" (click)="delUserFn()" class="w-100 w-40-ns pa3">Delete Profile</button>
-  </div>
-</ng-template>
-
-<div class="pa5"></div>
 
 
 

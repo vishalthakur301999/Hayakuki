@@ -1,0 +1,43 @@
+<form class="example-form" [formGroup]="createFlight" (ngSubmit)="onSubmit()">
+<div class="flex flex-wrap pa3">
+    <mat-form-field appearance="outline">
+      <mat-label>Flight Number</mat-label>
+      <input matInput placeholder="Flight Number" name="flightNumber" formControlName="flightNumber" value="">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Source Code</mat-label>
+      <input matInput placeholder="Source Airport Code" name="sourceCode" formControlName="sourceCode" value="">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Destination Code</mat-label>
+      <input matInput placeholder="Destination Airport Code" value="" name="destCode" formControlName="destCode">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Airline</mat-label>
+      <input matInput placeholder="Airline" value="" name="airline" formControlName="airline">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Aircraft Type</mat-label>
+      <input matInput placeholder="Aircraft Type" value="narrowbody" formControlName="aircraftType" name="aircraftType">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Departure Time</mat-label>
+      <input matInput placeholder="Departure Time" value="00:00" name="deptTime" formControlName="deptTime">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Arrival Time</mat-label>
+      <input matInput placeholder="Arrival Time" value="00:00" name="arrivalTime" formControlName="arrivalTime">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Duration</mat-label>
+      <input matInput placeholder="Duration" value="" name="duration" formControlName="duration">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Fare</mat-label>
+      <input type="number" matInput placeholder="Fare" value="" name="fare" formControlName="fare">
+    </mat-form-field>
+  </div>
+  <div class="flex justify-center pb4">
+    <button class="pa2 h3 w5" mat-raised-button color="primary" [disabled]="!createFlight.valid">Submit</button>
+  </div>
+</form>

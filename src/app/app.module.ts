@@ -16,6 +16,10 @@ import { SignupComponent } from './User/signup/signup.component';
 import {AuthorizationService} from './authorization/authorization.service';
 import { ProfileComponent } from './User/profile/profile.component';
 import { OnewaybookingComponent } from './booking/onewaybooking/onewaybooking.component';
+import { BookingsComponent } from './User/bookings/bookings.component';
+import { TestComponent } from './test/test.component';
+import { AdminflightComponent } from './adminconsole/adminflight/adminflight.component';
+import { AdminflightcreateComponent } from './adminconsole/adminflightcreate/adminflightcreate.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { OnewaybookingComponent } from './booking/onewaybooking/onewaybooking.co
     LoginComponent,
     SignupComponent,
     ProfileComponent,
-    OnewaybookingComponent
+    OnewaybookingComponent,
+    BookingsComponent,
+    TestComponent,
+    AdminflightComponent,
+    AdminflightcreateComponent
   ],
     imports: [
         BrowserModule,

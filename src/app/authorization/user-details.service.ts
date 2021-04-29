@@ -27,4 +27,8 @@ export class UserDetailsService {
       this.changeMessage(temp);
     });
   }
+  clear(): void{
+   this.dummy = null;
+   this.changeMessage(this.dummy);
+  }
 }

@@ -13,7 +13,7 @@
       </tr>
       <tr>
         <td rowspan="2">Departure</td>
-        <td>{{pad(selectedFlight.flight.deptTime.hours,2) +":"+ pad(selectedFlight.flight.deptTime.minutes,2)}} on {{dformatter(selectedFlight.dot)}}</td>
+        <td>{{selectedFlight.flight.deptTime}} on {{dformatter(selectedFlight.dot)}}</td>
       </tr>
       <tr>
         <td>{{sourceAirport.airportName+", "+sourceAirport.city}}</td>
@@ -23,7 +23,7 @@
       </tr>
       <tr>
         <td rowspan="2">Arrival</td>
-        <td>{{pad(selectedFlight.flight.arrivalTime.hours,2) +":"+ pad(selectedFlight.flight.arrivalTime.minutes,2)}} on {{dformatter(selectedFlight.dot)}}</td>
+        <td>{{selectedFlight.flight.arrivalTime}} on {{dformatter(selectedFlight.dot)}}</td>
       </tr>
       <tr>
         <td>{{destAirport.airportName+", "+destAirport.city}}</td>

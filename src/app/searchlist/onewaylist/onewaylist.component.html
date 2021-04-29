@@ -21,19 +21,19 @@
   <div *ngFor="let flight of queryResult">
     <div class="pa3 w-auto ma3 mr6-ns ml6-ns mr2-m ml2-m flex flex-column hover-bg-black bg-dark-gray" (click)="pick(flight)">
       <div class="flex pa3">
-        <div class="w-25 tc pa3-ns pa1 f3-ns f5 fjalla"><span>{{flight.airline+" "}}</span><br><span>{{flight.flightNumber}}</span></div>
+        <div class="w-25 tc-ns tl pa3-ns pa1 f3-ns f6 fjalla"><span>{{flight.airline+" "}}</span><br><span>{{flight.flightNumber}}</span></div>
         <div class="w-50 tc flex justify-center">
-          <div class="pa3-ns pa1 f3-ns f5 fjalla">
-            <span>{{pad(flight.deptTime.hours,2) +":"+ pad(flight.deptTime.minutes,2)}}<br>{{ flight.sourceCode}}</span>
+          <div class="pa3-ns pa1 f3-ns f6 fjalla">
+            <span>{{flight.deptTime}}<br>{{ flight.sourceCode}}</span>
           </div>
           <div class="pa3-ns pa1 f4-ns f6">
             <span>{{flight.duration}}</span><br><mat-icon>arrow_forward</mat-icon>
           </div>
-          <div class="pa3-ns pa1 f3-ns f5 fjalla">
-            <span>{{pad(flight.arrivalTime.hours,2) +":"+ pad(flight.arrivalTime.minutes,2)}} <br>{{flight.destCode}}</span>
+          <div class="pa3-ns pa1 f3-ns f6 fjalla">
+            <span>{{flight.arrivalTime}} <br>{{flight.destCode}}</span>
           </div>
         </div>
-        <div class="w-25 tc pa3-ns pa1 f2-ns f4 fjalla"><span>₹{{flight.fare}}</span></div>
+        <div class="w-25 tc-ns tr pa3-ns pa1 f2-ns f5 fjalla"><span>₹{{flight.fare}}</span></div>
       </div>
     </div>
   </div>

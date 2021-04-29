@@ -16,4 +16,7 @@ export class LoginComponent implements OnInit {
   onSubmit(data: any): void {
     this.auth.loginInitiate(data.username, data.password);
   }
+  navSignup(): void{
+    this.router.navigate(['signup']);
+  }
 }

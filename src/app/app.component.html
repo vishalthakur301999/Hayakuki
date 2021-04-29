@@ -15,7 +15,7 @@
           <a mat-list-item routerLink="blogs" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">landscape</mat-icon><span class="pa2">Travel Ideas</span></a>
           <a mat-list-item routerLink="profile" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">person</mat-icon><span class="pa2">My Profile</span></a>
           <a mat-list-item routerLink="login" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">airplane_ticket</mat-icon><span class="pa2">My Bookings</span></a>
-          <a mat-list-item routerLink="login" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">logout</mat-icon><span class="pa2">Logout</span></a>
+          <a mat-list-item (click)="logoutFn()"><mat-icon class="pa2">logout</mat-icon><span class="pa2">Logout</span></a>
         </ng-template>
         </mat-nav-list>
     </mat-sidenav>

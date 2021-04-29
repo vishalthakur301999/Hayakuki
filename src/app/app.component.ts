@@ -26,4 +26,7 @@ export class AppComponent implements OnDestroy, OnInit{
   lgStatus(): boolean{
     return this.auth.loginStatus;
   }
+  logoutFn(): void{
+    this.auth.logoutInitiate();
+  }
 }

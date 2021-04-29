@@ -63,8 +63,10 @@ export class AuthorizationService {
     return this.http.get(this.baseurlGet + id);
   }
   logoutInitiate(): void{
+    this.ud.clear();
     this.loginStatus = false;
     this.userdetails = null;
+    this.router.navigate(['home']);
   }
   lgStatus(): boolean{
     if (sessionStorage.getItem('user') != null){

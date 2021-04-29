@@ -1,0 +1,25 @@
+<section class="loginback">
+  <div class="bg-black-40 h-100">
+    <div class="loginbox h-100 flex justify-center">
+      <div class="pa5-ns pa4 innerbox">
+        <span class="f1 white fjalla">Login</span><br>
+        <div class="h3"></div>
+        <form #loginform = 'ngForm' (ngSubmit)="onSubmit(loginform.value)">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Enter Your Username</mat-label>
+            <input matInput placeholder="username" ngModel required name="username">
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>Enter your password</mat-label>
+            <input matInput placeholder="password" [type]="hide ? 'password' : 'text'" ngModel required name="password">
+            <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </a>
+          </mat-form-field>
+          <button mat-raised-button color="primary" class="w-100 pa3">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

@@ -4,9 +4,12 @@ import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
 import {OnewayquerydataService} from '../../Services/onewayquerydata.service';
 import {Router} from '@angular/router';
+import {AirportfetchService} from '../../Services/airportfetch.service';
 
-export interface User {
-  name: string;
+export interface Airport {
+  city: string;
+  airportCode: string;
+  country: string;
 }
 
 @Component({
@@ -15,49 +18,62 @@ export interface User {
   styleUrls: ['./flightsearch.component.css', '../../../../node_modules/tachyons/css/tachyons.min.css']
 })
 
-
-
 export class FlightsearchComponent implements OnInit {
   minDate;
   curDate = new Date();
-  // @ts-ignore
-  tripType = 'oneway'; filteredOptions: Observable<User[]>;
-  myControl = new FormControl();
-  options: User[] = [
-    {name: 'DEL'},
-    {name: 'MAA'},
-    {name: 'BLR'}
-  ];
+  minpass = 1;
   nums: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  constructor( private odqds: OnewayquerydataService, private route: Router) {
+  // @ts-ignore
+  tripType = 'oneway';
+  deptCtrl = new FormControl();
+  arrivalCtrl = new FormControl();
+  filteredArrival: Observable<Airport[]>;
+  filteredDept: Observable<Airport[]>;
+  // @ts-ignore
+  apFetchServer: object;
+  airports: Airport[] = [];
+  constructor( private odqds: OnewayquerydataService, private route: Router, private airportService: AirportfetchService) {
     this.minDate = new Date();
+    this.airportService.getAllAirports().subscribe( e =>
+    {
+      this.apFetchServer = e;
+      // @ts-ignore
+      for (const apfs of this.apFetchServer) {
+        this.airports.push(apfs);
+      }
+    });
+    this.filteredArrival = this.arrivalCtrl.valueChanges
+      .pipe(
+        startWith(''),
+        map(airport => airport ? this._filterStates(airport) : this.airports.slice())
+      );
+    this.filteredDept = this.deptCtrl.valueChanges
+      .pipe(
+        startWith(''),
+        map(airport => airport ? this._filterStates(airport) : this.airports.slice())
+      );
   }
 
   ngOnInit(): void {
-    this.filteredOptions = this.myControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.options.slice())
-      );
-  }
-  displayFn(user: User): string {
-    return user && user.name ? user.name : '';
-  }
-
-  private _filter(name: string): User[] {
-    const filterValue = name.toLowerCase();
-
-    return this.options.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
   }
   oneWaySubmit(data: any): void{
-    const qdata = {
-      from : data.from.name,
-      to : data.to.name,
-      dot : new Date()
-    };
-    this.odqds.changeMessage(qdata);
-    this.route.navigate(['onewaylist']);
+    if (this.deptCtrl.value !== '' && this.arrivalCtrl.value !== ''){
+      const qdata = {
+        from : this.deptCtrl.value,
+        to : this.arrivalCtrl.value,
+        dot: data.dot,
+        passengers: data.count,
+        sortby: 'Fare',
+        sortdirection: 'asc'
+      };
+      this.odqds.changeMessage(qdata);
+      this.route.navigate(['onewaylist']);
+    }
+  }
+  private _filterStates(value: string): Airport[] {
+    const filterValue = value.toLowerCase();
+
+    return this.airports.filter(airport => airport.city.toLowerCase().indexOf(filterValue) === 0);
   }
 }
 

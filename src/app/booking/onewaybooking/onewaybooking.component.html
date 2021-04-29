@@ -1,0 +1,96 @@
+<main class="flex flex-wrap bg-black">
+  <section class="pa4 bg-black vh-100-ns w-50-m w-30-ns w-100 h-100-ns overflow-y-scroll-ns">
+    <p class="f1 fjalla">{{sourceAirport.city}} &#8594; {{destAirport.city}}</p>
+    <table class="overviewtable">
+      <tr>
+        <td colspan="2"><p class="f3 fjalla">Flight Overview - </p></td>
+      </tr>
+      <tr>
+        <td colspan="2">{{selectedFlight.flight.airline +" "+selectedFlight.flight.flightNumber}}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><hr></td>
+      </tr>
+      <tr>
+        <td rowspan="2">Departure</td>
+        <td>{{pad(selectedFlight.flight.deptTime.hours,2) +":"+ pad(selectedFlight.flight.deptTime.minutes,2)}} on {{dformatter(selectedFlight.dot)}}</td>
+      </tr>
+      <tr>
+        <td>{{sourceAirport.airportName+", "+sourceAirport.city}}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><hr></td>
+      </tr>
+      <tr>
+        <td rowspan="2">Arrival</td>
+        <td>{{pad(selectedFlight.flight.arrivalTime.hours,2) +":"+ pad(selectedFlight.flight.arrivalTime.minutes,2)}} on {{dformatter(selectedFlight.dot)}}</td>
+      </tr>
+      <tr>
+        <td>{{destAirport.airportName+", "+destAirport.city}}</td>
+      </tr>
+    </table>
+  </section>
+  <section class="bg-dark-gray w-40-ns w-50-m w-100 vh-100-ns overflow-y-scroll-ns pa4">
+    <div style="padding-top: 50px"></div>
+    <div class="container">
+      <span class="f1 fjalla">Passengers</span>
+      <form [formGroup]="passengerform" (ngSubmit)="onSubmit()">
+        <table class="" formArrayName="quantities">
+          <tr class="pa0" *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
+            <td class="pa0">
+              <input class="ba bg-dark-gray br0 pa2 white ma1 w5" type="text" formControlName="name" placeholder="Name">
+              <input class="ba bg-dark-gray br0 pa2 white ma1 w3" formControlName="age" matInput placeholder="age">
+              <select class="ba bg-dark-gray br0 pa2 white ma1" style="width: 100px" name="gender" formControlName="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Others">Others</option>
+              </select>
+              <a (click)="removeQuantity(i)"><mat-icon>close</mat-icon></a>
+            </td>
+          </tr>
+        </table>
+        <div class="pt2"></div>
+        <a (click)="addQuantity()" class="bg-black pa2 ma1">Add Passenger</a>
+      </form>
+      <div class="pa3"></div>
+      <span class="f1 fjalla">Luggage</span>
+      <div class="pa2"></div>
+      <span>One 15Kg Checked-In Baggage and One 7Kg Hand Baggage <br> Allowed Per Person</span>
+      <div class="pa3"></div>
+        <!--<button type="submit" class="btn btn-success">Submit</button>-->
+    </div>
+  </section>
+  <section class=" pa4 bg-gray w-30-ns w-100-m w-100 vh-100-ns overflow-y-scroll-ns flex flex-column justify-center">
+    <p class="f1 fjalla">Fare summary</p>
+    <table class="overviewtable">
+      <tr>
+        <td colspan="2" class="b f3 fjalla">Base Charges</td>
+      </tr>
+      <tr>
+        <td>Passenger(s) ({{selectedFlight.passengers}} X ₹ {{selectedFlight.flight.fare}})</td>
+        <td>{{selectedFlight.passengers * selectedFlight.flight.fare}}</td>
+      </tr>
+      <tr><td colspan="2"><hr></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="b f3 fjalla">Other Charges</td>
+      </tr>
+      <tr>
+        <td>Convenience Charges</td>
+        <td>0</td>
+      </tr>
+      <tr><td colspan="2">
+        <hr></td></tr>
+      <tr>
+      <tr>
+        <td class="b f3 fjalla">Total Amount </td>
+        <td>{{selectedFlight.passengers * selectedFlight.flight.fare}}</td>
+      </tr>
+      <tr>
+    </table>
+    <div class="flex justify-center">
+      <button mat-raised-button color="primary" class="pa3 ma3 f3 fjalla" (click)="startBooking()">Book Now</button>
+    </div>
+
+  </section>
+</main>

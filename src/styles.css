@@ -3,3 +3,10 @@
 html, body { height: 100%; margin: 0; padding: 0; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+@font-face {
+  font-family: 'fjalla';
+  src : url("app/img/FjallaOne-Regular.ttf");
+}
+.fjalla{
+  font-family: fjalla;
+}

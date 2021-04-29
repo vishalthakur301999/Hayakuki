@@ -1,0 +1,90 @@
+<div class="f-6-ns f1 pa6-ns pa4 fjalla bg-black"> My Profile</div>
+<div class="pt4 pb4 flex justify-center" *ngIf="fieldsetDisabled; else enabled">
+  <button (click)="formToggle()" mat-raised-button color="warn" class="w-100 w-40-ns pa3">Enable Update</button>
+</div>
+<ng-template #enabled>
+  <div class="pt4 pb4 flex justify-center">
+    <button (click)="rld()" mat-raised-button color="accent" class="w-100 w-40-ns pa3">Cancel Update</button>
+  </div>
+</ng-template>
+<form #updateForm='ngForm' (ngSubmit)="update(updateForm.value)">
+  <fieldset [disabled]="fieldsetDisabled" style="border: none">
+
+<div class="w-100 flex flex-wrap justify-center">
+  <div class="flex w-50-ns w-80-m w-100 h-100 flex-column pr6-ns pl6-ns pt4 pb1 pr4-m pl4-m pr2 pl2">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Enter Your Name</mat-label>
+      <input matInput placeholder="name" name="name" [(ngModel)]="name" required>
+      <mat-icon matSuffix>account_circle</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Enter Your Username</mat-label>
+      <input matInput placeholder="username" name="userName" [(ngModel)]="username" required>
+      <mat-icon matSuffix>account_circle</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Enter Your Mobile Number</mat-label>
+      <input matInput placeholder="mobile" name="mobile" [(ngModel)]="mobile" required>
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-hint *ngIf="!mobilecheck()">Please enter a valid phone number</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Enter Your Email</mat-label>
+      <input type="email" matInput placeholder="email" name="email" [(ngModel)]="email" required>
+      <mat-icon matSuffix>mail</mat-icon>
+      <mat-hint *ngIf="!emailcheck()">Please enter a valid email address</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="flex w-50-ns w-80-m w-100 h-100 flex-column pr6-ns pl6-ns pt4 pb1 pr4-m pl4-m pr2 pl2">
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Gender</mat-label>
+      <select matNativeControl required name="gender" [(ngModel)]="gender">
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+        <option value="Others">Others</option>
+      </select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Age</mat-label>
+      <input matInput name="age" [(ngModel)]="age">
+      <mat-icon matSuffix>calendar_today</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Address</mat-label>
+      <textarea matInput name="address" [(ngModel)]="address" cols="35" rows="8" placeholder="Address" required></textarea>
+    </mat-form-field>
+  </div>
+</div>
+
+  </fieldset>
+</form>
+<div class="flex justify-center">
+
+</div>
+
+<div class="pt3 pb3 flex justify-center" *ngIf="fieldsetDisabled; else change">
+</div>
+<ng-template #change>
+  <div class="pt3 pb3 flex justify-center">
+    <button mat-raised-button color="primary" (click)="updateUserFn(updateForm.value)" class="w-100 w-40-ns pa3">Update</button>
+  </div>
+  <div class="pt3 pb3 flex justify-center">
+    <button mat-raised-button color="warn" (click)="delUserFn()" class="w-100 w-40-ns pa3">Delete Profile</button>
+  </div>
+</ng-template>
+
+<div class="pa5"></div>
+
+
+
+
+
+
+
+

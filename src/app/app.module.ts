@@ -11,6 +11,11 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { SearchlistComponent } from './searchlist/searchlist.component';
 import { OnewaylistComponent } from './searchlist/onewaylist/onewaylist.component';
 import {HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './User/login/login.component';
+import { SignupComponent } from './User/signup/signup.component';
+import {AuthorizationService} from './authorization/authorization.service';
+import { ProfileComponent } from './User/profile/profile.component';
+import { OnewaybookingComponent } from './booking/onewaybooking/onewaybooking.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,10 @@ import {HttpClientModule} from '@angular/common/http';
     StoriesComponent,
     SearchlistComponent,
     OnewaylistComponent,
+    LoginComponent,
+    SignupComponent,
+    ProfileComponent,
+    OnewaybookingComponent
   ],
     imports: [
         BrowserModule,
@@ -28,9 +37,9 @@ import {HttpClientModule} from '@angular/common/http';
         MaterialModule,
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
     ],
-  providers: [],
+  providers: [AuthorizationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

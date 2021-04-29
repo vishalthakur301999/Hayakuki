@@ -1,0 +1,82 @@
+<section class="signupback">
+  <div class="bg-black-40">
+  <div class="signupbox flex justify-center">
+    <div class="pa5-ns pa4 innerbox">
+      <span class="f1 white fjalla">Sign Up</span><br>
+      <div class="h2"></div>
+      <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm.value)">
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Enter Your Name</mat-label>
+          <input matInput placeholder="name" name="name" [(ngModel)]="name" required>
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Enter Your Username</mat-label>
+          <input matInput placeholder="username" name="userName" [(ngModel)]="username" required>
+          <mat-icon matSuffix>account_circle</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Enter your password</mat-label>
+          <input matInput placeholder="password" [type]="hide ? 'password' : 'text'" name="password" [(ngModel)]="pass" required>
+          <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </a>
+          <mat-hint *ngIf="!passvalidcheck()">1 uppercase, 1 lowercase, 1 number and min 8 characters required</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Confirm password</mat-label>
+          <input matInput placeholder="confirm password" [type]="hide ? 'password' : 'text'" name="cpass" [(ngModel)]="confirmpass" required>
+          <a mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </a>
+          <mat-hint *ngIf="!cpasscheck()">Passwords Dont Match</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Enter Your Email</mat-label>
+          <input type="email" matInput placeholder="email" name="email" [(ngModel)]="email" required>
+          <mat-icon matSuffix>mail</mat-icon>
+          <mat-hint *ngIf="!emailcheck()">Please enter a valid email address</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Enter Your Mobile Number</mat-label>
+          <input matInput placeholder="mobile" name="mobile" [(ngModel)]="mobile" required>
+          <mat-icon matSuffix>phone</mat-icon>
+          <mat-hint *ngIf="!mobilecheck()">Please enter a valid phone number</mat-hint>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Gender</mat-label>
+          <select matNativeControl required name="gender" [(ngModel)]="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Others">Others</option>
+          </select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [matDatepicker]="picker" name="dob" [(ngModel)]="bdate">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Address</mat-label>
+          <textarea matInput name="address" [(ngModel)]="address" cols="35" rows="8" placeholder="Address" required></textarea>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" class="w-100 pa3">Sign Up</button>
+      </form>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+

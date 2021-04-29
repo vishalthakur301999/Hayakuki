@@ -1,12 +1,41 @@
+<div style="padding-top: 50px"></div>
+<section class="flex flex-wrap justify-center">
+  <p class="pa3">
+    <span class="pr3">Sort By</span>
+    <mat-button-toggle-group class="" name="ticketType" aria-label="Font Style" [(ngModel)] = "orderby">
+      <mat-button-toggle class="" value="Fare" (click)="refresh()">Fare</mat-button-toggle>
+      <mat-button-toggle class="" value="DeptTime" (click)="refresh()">Departure Time</mat-button-toggle>
+      <mat-button-toggle class="" value="ArrivalTime" (click)="refresh()">Arrival Time</mat-button-toggle>
+      <mat-button-toggle class="" value="Duration" (click)="refresh()">Duration</mat-button-toggle>
+    </mat-button-toggle-group>
+  </p>
+  <p class="pa3">
+    <span class="pr3">Sort Type</span>
+    <mat-button-toggle-group class="" name="ticketType" aria-label="Font Style" [(ngModel)] = "sort">
+      <mat-button-toggle class="" value="asc" (click)="refresh()"><mat-icon>arrow_upward</mat-icon></mat-button-toggle>
+      <mat-button-toggle class="" value="dsc" (click)="refresh()"><mat-icon>arrow_downward</mat-icon></mat-button-toggle>
+    </mat-button-toggle-group>
+  </p>
+</section>
 <section class="flex-wrap pa2" style="background-color: #212121">
   <div *ngFor="let flight of queryResult">
-    <div style="background-color: #313131" class="pa2 w-auto ma3 pa2">
-      <span>{{flight.flightNumber}}</span><br>
-      <span>{{flight.airline}}</span><br>
-      <span>{{flight.deptTime}} - </span>
-      <span>{{flight.arrivalTime}}</span><br>
-      <span>{{flight.duration}}</span><br>
-      <span>{{flight.fare}}</span>
+    <div class="pa3 w-auto ma3 mr6-ns ml6-ns mr2-m ml2-m flex flex-column hover-bg-black bg-dark-gray" (click)="pick(flight)">
+      <div class="flex pa3">
+        <div class="w-25 tc pa3-ns pa1 f3-ns f5 fjalla"><span>{{flight.airline+" "}}</span><br><span>{{flight.flightNumber}}</span></div>
+        <div class="w-50 tc flex justify-center">
+          <div class="pa3-ns pa1 f3-ns f5 fjalla">
+            <span>{{pad(flight.deptTime.hours,2) +":"+ pad(flight.deptTime.minutes,2)}}<br>{{ flight.sourceCode}}</span>
+          </div>
+          <div class="pa3-ns pa1 f4-ns f6">
+            <span>{{flight.duration}}</span><br><mat-icon>arrow_forward</mat-icon>
+          </div>
+          <div class="pa3-ns pa1 f3-ns f5 fjalla">
+            <span>{{pad(flight.arrivalTime.hours,2) +":"+ pad(flight.arrivalTime.minutes,2)}} <br>{{flight.destCode}}</span>
+          </div>
+        </div>
+        <div class="w-25 tc pa3-ns pa1 f2-ns f4 fjalla"><span>₹{{flight.fare}}</span></div>
+      </div>
     </div>
   </div>
 </section>
+

@@ -1,3 +1,9 @@
-.match-tbar{
-  background-color: #212121;
+.cm{
+  margin: 5px;
+}
+.bgimg{
+  background-image: url("../../img/flsearchbg.jpg");
+  background-position: center bottom;
+  background-size: cover;
+  background-color: rgba(0,0,0,0.7);
 }

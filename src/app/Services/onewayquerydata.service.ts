@@ -9,7 +9,10 @@ export class OnewayquerydataService {
   oneWayQuery = {
     from: '',
     to: '',
-    dot: new Date()
+    dot: '',
+    passengers: 0,
+    sortby: '',
+    sortdirection: ''
   };
   private messageSource = new BehaviorSubject(this.oneWayQuery);
   currentMessage = this.messageSource.asObservable();

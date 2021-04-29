@@ -5,7 +5,7 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class FlightsearchService {
-  baseurl = 'https://localhost:5001/api/Flight/';
+  baseurl = 'https://localhost:5001/api/FlightQuery';
   constructor(private http: HttpClient) {}
   // tslint:disable-next-line:typedef
   searchFlights(FlightQuery: object){

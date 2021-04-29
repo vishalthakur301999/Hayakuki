@@ -1,0 +1,50 @@
+.signupback{
+  background-image: url("../../img/signupbg.jpg");
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+.innerbox{
+  background-color: #212121;
+}
+@media screen and (max-width: 600px){
+  .signupbox{
+    width: 100%;
+  }
+  .innerbox{
+    width: 100%;
+  }
+  .widthcontrol{
+    width: 0;
+    padding: 0;
+  }
+}
+@media screen and (min-width: 600px){
+  .signupbox{
+    width: 100%;
+    padding: 3rem
+  }
+  .innerbox{
+    width: 500px;
+  }
+  .widthcontrol{
+    width: 0;
+    padding: 0;
+  }
+}
+@media screen and (min-width: 992px){
+  .signupbox{
+    width: 50%;
+    padding: 3rem;
+  }
+  .innerbox{
+    width: 500px;
+  }
+  .widthcontrol{
+    width: 50%;
+    padding: 0;
+  }
+}
+mat-hint{
+  color: red;
+}

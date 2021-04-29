@@ -1,50 +1,31 @@
-<mat-sidenav-container>
-  <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'" [opened]="!mobileQuery.matches" [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
-    <div class="sidenav-header">
-      <span>{{collapsedNav && !mobileQuery.matches ? 'S' : 'SideNav'}}</span>
-    </div>
-    <ul>
-      <li>
-        <div *ngIf="collapsedNav; else homeicon">
-          <mat-icon>flight_takeoff</mat-icon>
-        </div>
-        <ng-template #homeicon>
-          Fly
+<mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches">
+      <mat-nav-list>
+        <span class="sidenav-header f3 fjalla">Hayakoki</span>
+        <div *ngIf="!lgStatus() then navout; else navin"></div>
+        <ng-template #navout>
+          <a mat-list-item routerLink="home" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">flight_takeoff</mat-icon><span class="pa2">Fly</span></a>
+          <a mat-list-item routerLink="blogs" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">landscape</mat-icon><span class="pa2">Travel Ideas</span></a>
+          <a mat-list-item routerLink="signup" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">person_add</mat-icon><span class="pa2">SignUp</span></a>
+          <a mat-list-item routerLink="login" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">login</mat-icon><span class="pa2">Login</span></a>
         </ng-template>
-      </li>
-      <li>
-        <div *ngIf="collapsedNav; else blogicon">
-          <mat-icon>landscape</mat-icon>
-        </div>
-        <ng-template #blogicon>
-          Travel Ideas
+        <ng-template #navin>
+          <a mat-list-item routerLink="home" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">flight_takeoff</mat-icon><span class="pa2">Fly</span></a>
+          <a mat-list-item routerLink="blogs" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">landscape</mat-icon><span class="pa2">Travel Ideas</span></a>
+          <a mat-list-item routerLink="profile" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">person</mat-icon><span class="pa2">My Profile</span></a>
+          <a mat-list-item routerLink="login" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">airplane_ticket</mat-icon><span class="pa2">My Bookings</span></a>
+          <a mat-list-item routerLink="login" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">logout</mat-icon><span class="pa2">Logout</span></a>
         </ng-template>
-      </li>
-      <li>
-        <div *ngIf="collapsedNav; else loginicon">
-          <mat-icon>login</mat-icon>
-        </div>
-        <ng-template #loginicon>
-          Login
-        </ng-template>
-      </li>
-      <li>
-        <div *ngIf="collapsedNav; else signupicon">
-          <mat-icon>signup</mat-icon>
-        </div>
-        <ng-template #signupicon>
-          Sign Up
-        </ng-template>
-      </li>
-    </ul>
-  </mat-sidenav>
-  <mat-sidenav-content [ngClass]="{'sidenav-collapsed': collapsedNav && !mobileQuery.matches}">
-    <mat-toolbar>
-      <!-- <button mat-icon-button (click)="snav.toggle()"> -->
-      <button mat-icon-button (click)="mobileQuery.matches ? snav.toggle() : collapsedNav = !collapsedNav">
-        <mat-icon>menu</mat-icon>
-      </button>
-    </mat-toolbar>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <mat-toolbar>
+        <button mat-icon-button (click)="snav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>

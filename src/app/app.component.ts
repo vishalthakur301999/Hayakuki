@@ -29,4 +29,11 @@ export class AppComponent implements OnDestroy, OnInit{
   logoutFn(): void{
     this.auth.logoutInitiate();
   }
+  rolecheck(): boolean{
+    if (this.auth.role === 'admin'){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }

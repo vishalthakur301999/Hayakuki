@@ -1,0 +1,13 @@
+<main class="vh-100 w-100 bg-white flex flex-wrap-ns flex-column">
+  <section class="w-20-ns h-100-ns h-20 w-100 bg-dark-gray flex flex-column-ns flex wrap justify-center items-center">
+    <div class="h5 w5 bg-green ma1"></div>
+    <div class="h5 w5 bg-green ma1"></div>
+    <div><button class="w5-ns h2-ms h3-m w3-m h3 w3 pa2 ma1" mat-raised-button color="primary">Done</button></div>
+  </section>
+  <section class="w-80-ns h-100-ns h-80 w-100 bg-black">
+    <mat-tab-group mat-stretch-tabs headerPosition="below" class="overflow-y-scroll vh-100-ns h-100">
+      <mat-tab label="Onward"><app-roundonward></app-roundonward></mat-tab>
+      <mat-tab label="Return"> <app-roundreturn></app-roundreturn> </mat-tab>
+    </mat-tab-group>
+  </section>
+</main>

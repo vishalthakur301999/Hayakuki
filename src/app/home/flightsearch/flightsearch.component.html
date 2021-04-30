@@ -73,8 +73,9 @@
 
       <ng-template #round>
         <div class="w-100 flex flex-column">
+          <form #twoWayForm = "ngForm" (ngSubmit)="roundTripSubmit(twoWayForm.value)">
           <div class="flex flex-wrap justify-center">
-            <form #twoWayForm = "ngForm">
+
 
               <mat-form-field appearance="outline" class="w5-ns w-100 ma2-ns">
                 <mat-label>Departure</mat-label>
@@ -97,7 +98,7 @@
                        [matAutocomplete]="autoarrival"
                        [formControl]="arrivalCtrl">
                 <mat-autocomplete #autoarrival="matAutocomplete">
-                  <mat-option *ngFor="let airport of filteredDept | async" [value]="airport.airportCode">
+                  <mat-option *ngFor="let airport of filteredArrival | async" [value]="airport.airportCode">
                     <span>{{airport.city}} - {{airport.airportCode}}</span> |
                     <small>{{airport.country}}</small>
                   </mat-option>
@@ -106,7 +107,7 @@
               <!-- From date -->
               <mat-form-field appearance="outline" class="w5-ns w-100 ma2-ns">
                 <mat-label>Departure</mat-label>
-                <input matInput [min]="minDate" [matDatepicker]="departurePicker">
+                <input matInput [min]="minDate" [matDatepicker]="departurePicker" [(ngModel)]="curDate" name="dot">
                 <mat-datepicker-toggle matSuffix [for]="departurePicker">
                   <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                 </mat-datepicker-toggle>
@@ -115,7 +116,7 @@
               <!-- To date -->
               <mat-form-field appearance="outline" class="w5-ns w-100 ma2-ns">
                 <mat-label>Return</mat-label>
-                <input matInput [min]="minDate" [matDatepicker]="returnPicker">
+                <input matInput [min]="curDate" [matDatepicker]="returnPicker" ngModel name="dor">
                 <mat-datepicker-toggle matSuffix [for]="returnPicker">
                   <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
                 </mat-datepicker-toggle>
@@ -124,17 +125,16 @@
 
               <mat-form-field appearance="outline" class="w4-ns w-100 ma2-ns">
                 <mat-label>Travellers</mat-label>
-                <mat-select>
-                  <mat-option  *ngFor="let n of nums" [value]="n">
-                    {{n}}
-                  </mat-option>
-                </mat-select>
+                <select name="count" matNativeControl required [(ngModel)]="minpass">
+                  <option *ngFor="let n of nums">{{n}}</option>
+                </select>
               </mat-form-field>
-            </form>
+
           </div>
           <div class="flex justify-center w-100">
             <button mat-raised-button class="w-100 w-40-ns pa3 cm">Fly</button>
           </div>
+          </form>
         </div>
       </ng-template>
     </div>

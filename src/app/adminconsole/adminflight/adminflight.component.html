@@ -1,8 +1,7 @@
 <div style="padding-top: 5rem"></div>
 <mat-tab-group>
+  <mat-tab label="Manage"><app-adminflightedit></app-adminflightedit> </mat-tab>
   <mat-tab label="Create"><app-adminflightcreate></app-adminflightcreate></mat-tab>
-  <mat-tab label="Edit"> Content 2 </mat-tab>
-  <mat-tab label="Delete"> Content 3 </mat-tab>
 </mat-tab-group>
 <mat-paginator [pageSizeOptions]="[50, 100, 200, 500, 1000]" showFirstLastButtons></mat-paginator>
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -51,17 +50,6 @@
   <ng-container matColumnDef="arrivalTime">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>Arrival Time</th>
     <td mat-cell *matCellDef="let element"> {{element.arrivalTime}} </td>
-  </ng-container>
-
-  <!-- edit Column -->
-  <ng-container matColumnDef="edit">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Edit</th>
-    <td mat-cell *matCellDef="let element"><mat-icon>edit</mat-icon></td>
-  </ng-container>
-  <!-- delete Column -->
-  <ng-container matColumnDef="delete">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header>Delete</th>
-    <td mat-cell *matCellDef="let element"><mat-icon>delete</mat-icon></td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

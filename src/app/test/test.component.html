@@ -1,61 +1,36 @@
-<header>
-  <div>
-    <h1>Inline Editable Table</h1>
-  </div>
-  <mat-icon (click)="toggleTheme()" title="Change theme">format_color_fill</mat-icon>
-</header>
+<div style="padding-top: 100px"></div>
 <form [formGroup]="userTable">
-  <table class="table table-border" [ngClass]="{'table-dark': mode}">
-    <thead class="text-nowrap">
-    <th>ID</th>
-    <th>Name </th>
-    <th>Email</th>
-    <th>Date Of Birth</th>
-    <th>Blood Group</th>
-    <th>Mobile Number</th>
-    <th></th>
-    </thead>
+  <table class="table table-border">
     <tbody>
-    <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls ; let i=index">
+    <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls ; let i=index;">
       <tr *ngIf="group.get('isEditable')!.value" [formGroupName]="i">
         <td>
           <input type='hidden' formControlName="id" [ngModel]="23242424">
         </td>
         <td>
           <mat-form-field>
+            <mat-placeholder>Name</mat-placeholder>
             <input matInput type="text" formControlName="name">
           </mat-form-field>
         </td>
         <td>
           <mat-form-field>
-            <input matInput type="tetx" formControlName="email">
+            <mat-placeholder>Age</mat-placeholder>
+            <input matInput type="text" formControlName="age">
           </mat-form-field>
         </td>
         <td>
           <mat-form-field>
-            <input matInput matInput [matDatepicker]="picker" formControlName="dob">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <mat-select formControlName="bloodGroup">
-              <mat-option value="O+">O</mat-option>
-              <mat-option value="A">A</mat-option>
-              <mat-option value="B">B</mat-option>
-              <mat-option value="AB">AB</mat-option>
+            <mat-placeholder>Gender</mat-placeholder>
+            <mat-select formControlName="gender">
+              <mat-option value="male">Male</mat-option>
+              <mat-option value="female">Female</mat-option>
+              <mat-option value="others">Others</mat-option>
             </mat-select>
           </mat-form-field>
         </td>
         <td>
-          <mat-form-field>
-            <input matInput type="text" formControlName="mobNumber">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-icon class="delete" (click)="deleteRow(i)">delete_forever</mat-icon>
-          <mat-icon class="done" (click)="doneRow(group)">done</mat-icon>
+          <button (click)="doneRow(group)" [disabled]="!group.valid"><mat-icon>done</mat-icon></button>
         </td>
       </tr>
       <tr *ngIf="!group.get('isEditable')!.value">
@@ -63,16 +38,10 @@
           {{group.get('name')!.value}}
         </td>
         <td>
-          {{group.get('email')!.value}}
+          {{group.get('age')!.value}}
         </td>
         <td>
-          {{group.get('email')!.value}}
-        </td>
-        <td>
-          {{group.get('bloodGroup')!.value}}
-        </td>
-        <td>
-          {{group.get('mobNumber')!.value}}
+          {{group.get('gender')!.value}}
         </td>
         <td>
           <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
@@ -82,7 +51,7 @@
     </tbody>
   </table>
   <div class="action-container">
-    <button mat-raised-button type="submit" (click)="addRow()">Add row</button>
+    <button (click)="load()">load</button>
     <button mat-raised-button [disabled]="userTable.invalid" type="submit" (click)="submitForm()">Submit</button>
   </div>
 </form>

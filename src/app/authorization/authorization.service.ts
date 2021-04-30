@@ -14,6 +14,7 @@ export class AuthorizationService {
   // @ts-ignore
   creds: object; passhash; userdetails: any;
   loginStatus = false;
+  role = 'user';
   loginQueryData = {
     uname: '',
   };
@@ -40,10 +41,16 @@ export class AuthorizationService {
           this.getUserDetails(this.passserver.id).subscribe(f => {
             this.userdetails = f;
             this.ud.changeMessage(this.userdetails);
-            if (this.owb.bookingactive){
-              this.owb.initiateBooking();
-            }else{
-              this.router.navigate(['home']);
+            this.role = this.userdetails.role;
+            if (this.role === 'admin'){
+              this.router.navigate(['adminflight']);
+            }
+            else{
+              if (this.owb.bookingactive){
+                this.owb.initiateBooking();
+              }else{
+                this.router.navigate(['home']);
+              }
             }
           });
         }

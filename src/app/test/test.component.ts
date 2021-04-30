@@ -1,6 +1,11 @@
 import {AfterContentInit, Component, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+export interface Iticket{
+  id: string;
+  name: string;
+  age: number;
+  gender: string;
+}
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
@@ -10,6 +15,11 @@ export class TestComponent implements OnInit {
   // @ts-ignore
   userTable: FormGroup; control: FormArray; mode: boolean;
   touchedRows: any;
+  tickets: Iticket[] = [
+    { id: '24h23h23eh2d', name: 'vishal', age: 21, gender: 'male'},
+    { id: '345b35hvhvh3', name: 'Ravi', age: 17, gender: 'male'},
+    { id: 'h52433hv345v', name: 'manisha', age: 20, gender: 'female'}
+  ];
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
@@ -17,33 +27,29 @@ export class TestComponent implements OnInit {
     this.userTable = this.fb.group({
       tableRows: this.fb.array([])
     });
-    this.addRow();
   }
   // tslint:disable-next-line:typedef
   ngAfterOnInit() {
     this.control = this.userTable.get('tableRows') as FormArray;
   }
-
-  initiateForm(): FormGroup {
+  load(): void{
+    for (const ticket of this.tickets) {
+      this.addRow(ticket);
+    }
+  }
+  initiateForm(passenger: Iticket): FormGroup {
     return this.fb.group({
-      name: ['', Validators.required],
-      email: ['', [Validators.email, Validators.required]],
-      dob: ['', [Validators.required]],
-      bloodGroup: [''],
-      mobNumber: ['', [Validators.required, Validators.maxLength(10)]],
-      isEditable: [true],
-      id: ['', Validators.required]
+      name: [passenger.name, Validators.required],
+      age: [passenger.age, [Validators.required, Validators.pattern('[0-9]{1,3}'), Validators.min(0), Validators.max(120)]],
+      gender: [passenger.gender],
+      isEditable: [false],
+      id: [passenger.id, Validators.required]
     });
   }
   // tslint:disable-next-line:typedef
-  addRow() {
+  addRow(pas: Iticket) {
     const control = this.userTable.get('tableRows') as FormArray;
-    control.push(this.initiateForm());
-  }
-  // tslint:disable-next-line:typedef
-  deleteRow(index: number) {
-    const control = this.userTable.get('tableRows') as FormArray;
-    control.removeAt(index);
+    control.push(this.initiateForm(pas));
   }
 
   // tslint:disable-next-line:typedef
@@ -59,10 +65,6 @@ export class TestComponent implements OnInit {
     console.log(control.value[0]);
   }
 
-  // tslint:disable-next-line:typedef
-  saveUserDetails() {
-    console.log(this.userTable.value);
-  }
   // tslint:disable-next-line:typedef
   get getFormControls() {
     const control = this.userTable.get('tableRows') as FormArray;

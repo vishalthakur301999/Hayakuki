@@ -1,9 +1,12 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Injectable, OnInit, ViewChild} from '@angular/core';
 import {AdminflightService} from './adminflight.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
 
+@Injectable({
+  providedIn: 'root'
+})
 
 @Component({
   selector: 'app-adminflight',
@@ -12,8 +15,7 @@ import {MatPaginator} from '@angular/material/paginator';
 })
 export class AdminflightComponent implements OnInit, AfterViewInit {
   flightData: any;
-  // displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  displayedColumns: string[] = ['flightNumber', 'sourceCode', 'destCode', 'airline', 'aircraftType', 'deptTime', 'arrivalTime', 'duration', 'fare', 'edit', 'delete'];
+  displayedColumns: string[] = ['flightNumber', 'sourceCode', 'destCode', 'airline', 'aircraftType', 'deptTime', 'arrivalTime', 'duration', 'fare'];
   // @ts-ignore
   dataSource: any; @ViewChild(MatSort) sort: MatSort; @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor( private adminflight: AdminflightService) { }

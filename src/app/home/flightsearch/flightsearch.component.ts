@@ -5,6 +5,7 @@ import {startWith, map} from 'rxjs/operators';
 import {OnewayquerydataService} from '../../Services/onewayquerydata.service';
 import {Router} from '@angular/router';
 import {AirportfetchService} from '../../Services/airportfetch.service';
+import {RoundquerydataService} from '../../Services/roundquerydata.service';
 
 export interface Airport {
   city: string;
@@ -32,7 +33,8 @@ export class FlightsearchComponent implements OnInit {
   // @ts-ignore
   apFetchServer: object;
   airports: Airport[] = [];
-  constructor( private odqds: OnewayquerydataService, private route: Router, private airportService: AirportfetchService) {
+  constructor( private odqds: OnewayquerydataService, private route: Router,
+               private airportService: AirportfetchService, private rtqds: RoundquerydataService ) {
     this.minDate = new Date();
     this.airportService.getAllAirports().subscribe( e =>
     {
@@ -70,10 +72,24 @@ export class FlightsearchComponent implements OnInit {
       this.route.navigate(['onewaylist']);
     }
   }
+  roundTripSubmit(data: any): void{
+    if (this.deptCtrl.value !== '' && this.arrivalCtrl.value !== ''){
+      const qdata = {
+        from : this.deptCtrl.value,
+        to : this.arrivalCtrl.value,
+        dot: data.dot,
+        dor: data.dor,
+        passengers: data.count,
+        sortby: 'Fare',
+        sortdirection: 'asc'
+      };
+      this.rtqds.changeMessage(qdata);
+      this.route.navigate(['roundtriplist']);
+    }
+  }
   private _filterStates(value: string): Airport[] {
     const filterValue = value.toLowerCase();
-
-    return this.airports.filter(airport => airport.city.toLowerCase().indexOf(filterValue) === 0);
+    return this.airports.filter(airport => (airport.city.toLowerCase() + airport.airportCode.toLowerCase()).includes(filterValue));
   }
 }
 

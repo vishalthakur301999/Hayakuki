@@ -8,7 +8,6 @@ import { HomeComponent } from './home/home.component';
 import { FlightsearchComponent } from './home/flightsearch/flightsearch.component';
 import { StoriesComponent } from './home/stories/stories.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { SearchlistComponent } from './searchlist/searchlist.component';
 import { OnewaylistComponent } from './searchlist/onewaylist/onewaylist.component';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './User/login/login.component';
@@ -20,6 +19,17 @@ import { BookingsComponent } from './User/bookings/bookings.component';
 import { TestComponent } from './test/test.component';
 import { AdminflightComponent } from './adminconsole/adminflight/adminflight.component';
 import { AdminflightcreateComponent } from './adminconsole/adminflightcreate/adminflightcreate.component';
+import { AdminflighteditComponent } from './adminconsole/adminflightedit/adminflightedit.component';
+import { Test2Component } from './test/test2/test2.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { LayoutModule } from '@angular/cdk/layout';
+import { RoundtriplistComponent } from './searchlist/roundtriplist/roundtriplist.component';
+import { RoundonwardComponent } from './searchlist/roundtriplist/roundonward/roundonward.component';
+import { RoundreturnComponent } from './searchlist/roundtriplist/roundreturn/roundreturn.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +37,6 @@ import { AdminflightcreateComponent } from './adminconsole/adminflightcreate/adm
     HomeComponent,
     FlightsearchComponent,
     StoriesComponent,
-    SearchlistComponent,
     OnewaylistComponent,
     LoginComponent,
     SignupComponent,
@@ -36,7 +45,12 @@ import { AdminflightcreateComponent } from './adminconsole/adminflightcreate/adm
     BookingsComponent,
     TestComponent,
     AdminflightComponent,
-    AdminflightcreateComponent
+    AdminflightcreateComponent,
+    AdminflighteditComponent,
+    Test2Component,
+    RoundtriplistComponent,
+    RoundonwardComponent,
+    RoundreturnComponent
   ],
     imports: [
         BrowserModule,
@@ -46,6 +60,12 @@ import { AdminflightcreateComponent } from './adminconsole/adminflightcreate/adm
         ReactiveFormsModule,
         FormsModule,
         HttpClientModule,
+        MatGridListModule,
+        MatCardModule,
+        MatMenuModule,
+        MatIconModule,
+        MatButtonModule,
+        LayoutModule,
     ],
   providers: [AuthorizationService],
   bootstrap: [AppComponent]

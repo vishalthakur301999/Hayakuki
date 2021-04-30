@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdminflightService} from '../adminflight/adminflight.service';
+import {AdminflightComponent} from '../adminflight/adminflight.component';
+
+
 
 @Component({
   selector: 'app-adminflightcreate',
@@ -9,7 +12,7 @@ import {AdminflightService} from '../adminflight/adminflight.service';
 })
 export class AdminflightcreateComponent implements OnInit {
   createFlight: FormGroup;
-  constructor(private adminDB: AdminflightService) {
+  constructor(private adminDB: AdminflightService, private parent: AdminflightComponent) {
     this.createFlight = new FormGroup({
       flightNumber: new FormControl('', [Validators.required]),
       sourceCode: new FormControl('', [ Validators.required, Validators.pattern('[A-Z]{3}')]),
@@ -29,6 +32,7 @@ export class AdminflightcreateComponent implements OnInit {
     this.adminDB.postFlight(this.createFlight.value).subscribe(e => {
       const x = e;
       alert('Created');
+      this.parent.ngOnInit();
     });
   }
 }

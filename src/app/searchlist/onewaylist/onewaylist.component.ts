@@ -31,8 +31,13 @@ export class OnewaylistComponent implements OnInit {
       this.currorderby = this.queryData.sortby;
       this.currsort = this.queryData.sortdirection;
       console.log(qstrct);
-      this.fs.searchFlights(qstrct).subscribe(e => this.queryResult = e);
-      console.log(this.queryResult);
+      this.fs.searchFlights(qstrct).subscribe(e => {
+        this.queryResult = e;
+        console.log(this.queryResult);
+        if (this.queryResult.length === 0){
+          this.route.navigate(['home']);
+        }
+      });
     }
   }
   refresh(): void{
@@ -49,19 +54,8 @@ export class OnewaylistComponent implements OnInit {
         };
         this.currorderby = this.orderby;
         this.currsort = this.sort;
-        console.log(qstrct);
         this.fs.searchFlights(qstrct).subscribe(e => this.queryResult = e);
-        console.log(this.queryResult);
       }
-    }
-  }
-  pad(num: number, size: number): string {
-    const numstr = num.toString();
-    const len = numstr.length;
-    if (len === size){
-      return numstr;
-    }else{
-      return '0' + numstr;
     }
   }
   pick(flight: any): void{

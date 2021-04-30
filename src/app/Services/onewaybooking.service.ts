@@ -82,7 +82,7 @@ export class OnewaybookingService {
         console.log(this.ticketStructure);
         this.dbBooking(this.ticketStructure).subscribe( e => {
           this.openSnackBar('Booking Successful');
-          this.route.navigate(['home']);
+          this.route.navigate(['bookings']);
         });
     }
   }

@@ -1,10 +1,61 @@
 <main class="vh-100 w-100 bg-white flex flex-wrap-ns flex-column">
-  <section class="w-20-ns h-100-ns h-20 w-100 bg-dark-gray flex flex-column-ns flex wrap justify-center items-center">
-    <div class="h5 w5 bg-green ma1"></div>
-    <div class="h5 w5 bg-green ma1"></div>
-    <div><button class="w5-ns h2-ms h3-m w3-m h3 w3 pa2 ma1" mat-raised-button color="primary">Done</button></div>
+  <section class="w-20-ns h-100-ns w-40-m h-100-m h-20 w-100 bg-dark-gray flex flex-column-ns flex wrap justify-center items-center">
+    <div *ngIf="!onwardSelected();else onwardData"></div>
+    <ng-template #onwardData>
+      <div class="h5 w5 bg-black ma1 flex justify-center items-center inline-flex">
+        <table class="w-100">
+          <tr>
+            <td colspan="2" class="f3-ns f5 fjalla white pa2-ns pa1">{{round.sourceCode}} - {{round.destCode}} ({{dformatter(queryData.dot)}})</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="f4-ns f6 fjalla white pa2-ns pa1">{{round.airline}} {{round.flightNumber}}</td>
+          </tr>
+          <tr>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">Departure</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">{{round.deptTime}}</td>
+          </tr>
+          <tr>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">Arrival</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">{{round.arrivalTime}}</td>
+          </tr>
+          <tr>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">Fare {{round.fare}}</td>
+            <td><a (click)="removeOnward()"><mat-icon>delete</mat-icon></a></td>
+          </tr>
+        </table>
+      </div>
+    </ng-template>
+    <div *ngIf="!returnSelected();else returndata"></div>
+    <ng-template #returndata>
+      <div class="h5 w5 bg-black ma1 flex justify-center items-center inline-flex">
+        <table class="w-100">
+          <tr>
+            <td colspan="2" class="f3-ns f5 fjalla white pa2-ns pa1">{{returnflight.sourceCode}} - {{returnflight.destCode}} ({{dformatter(queryData.dor)}})</td>
+          </tr>
+          <tr>
+            <td colspan="2" class="f4-ns f6 fjalla white pa2-ns pa1">{{returnflight.airline}} {{returnflight.flightNumber}}</td>
+          </tr>
+          <tr>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">Departure</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">{{returnflight.deptTime}}</td>
+          </tr>
+          <tr>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">Arrival</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">{{returnflight.arrivalTime}}</td>
+          </tr>
+          <tr>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1">Fare {{returnflight.fare}}</td>
+            <td><a (click)="removeReturn()"><mat-icon>delete</mat-icon></a></td>
+          </tr>
+        </table>
+      </div>
+    </ng-template>
+    <div *ngIf="!nullCheck(); else subbtn"></div>
+    <ng-template #subbtn>
+      <div><button [disabled]="!nullCheck()" (click)="onSubmit()" class="w5-ns h2-ms h3-m w3-m h3 w3 pa2 ma1" mat-raised-button color="primary">Done</button></div>
+    </ng-template>
   </section>
-  <section class="w-80-ns h-100-ns h-80 w-100 bg-black">
+  <section class="w-80-ns h-100-ns w-60-m h-100-m h-80 w-100 bg-black">
     <mat-tab-group mat-stretch-tabs headerPosition="below" class="overflow-y-scroll vh-100-ns h-100">
       <mat-tab label="Onward"><app-roundonward></app-roundonward></mat-tab>
       <mat-tab label="Return"> <app-roundreturn></app-roundreturn> </mat-tab>

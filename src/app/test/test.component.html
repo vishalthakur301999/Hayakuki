@@ -1,61 +1,85 @@
 <div style="padding-top: 100px"></div>
-<form [formGroup]="userTable">
-  <table class="table table-border">
-    <tbody>
-    <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls ; let i=index;">
-      <tr *ngIf="group.get('isEditable')!.value" [formGroupName]="i">
-        <td>
-          <input type='hidden' formControlName="id" [ngModel]="23242424">
-        </td>
-        <td>
-          <mat-form-field>
-            <mat-placeholder>Name</mat-placeholder>
-            <input matInput type="text" formControlName="name">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <mat-placeholder>Age</mat-placeholder>
-            <input matInput type="text" formControlName="age">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field>
-            <mat-placeholder>Gender</mat-placeholder>
-            <mat-select formControlName="gender">
-              <mat-option value="male">Male</mat-option>
-              <mat-option value="female">Female</mat-option>
-              <mat-option value="others">Others</mat-option>
-            </mat-select>
-          </mat-form-field>
-        </td>
-        <td>
-          <button (click)="doneRow(group)" [disabled]="!group.valid"><mat-icon>done</mat-icon></button>
-        </td>
-      </tr>
-      <tr *ngIf="!group.get('isEditable')!.value">
-        <td>
-          {{group.get('name')!.value}}
-        </td>
-        <td>
-          {{group.get('age')!.value}}
-        </td>
-        <td>
-          {{group.get('gender')!.value}}
-        </td>
-        <td>
-          <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
-        </td>
-      </tr>
-    </ng-container>
-    </tbody>
-  </table>
-  <div class="action-container">
-    <button (click)="load()">load</button>
-    <button mat-raised-button [disabled]="userTable.invalid" type="submit" (click)="submitForm()">Submit</button>
-  </div>
-</form>
+
 <div class="output">
   <p>Form Data: {{userTable.value | json}}</p>
   <p>Is Valid: {{userTable.valid}}</p>
+</div>
+
+<section *ngFor="let BookingID of bookingIDs">  </section>
+<main *ngIf="bookingIDs.length > 0">
+  <form [formGroup]="userTable">
+    <ng-container formArrayName="tableRows" *ngFor="let group of getFormControls.controls ; let i=index;">
+    <mat-accordion class="pa2">
+      <mat-expansion-panel class="pa2">
+        <mat-expansion-panel-header>
+          <mat-panel-title class="f5-ns f5-m f6 tl">
+            Click to modify Passenger details
+          </mat-panel-title>
+          <mat-panel-description class="flex justify-end f5-ns f5-m f6 tr">
+            3 Passengers
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="flex justify-center">
+
+              <table class="table table-border">
+                <tbody>
+
+                  <tr *ngIf="group.get('isEditable')!.value" [formGroupName]="i">
+                    <td>
+                      <mat-form-field>
+                        <mat-placeholder>Name</mat-placeholder>
+                        <input matInput type="text" formControlName="name">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field>
+                        <mat-placeholder>Age</mat-placeholder>
+                        <input matInput type="text" formControlName="age">
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <mat-form-field>
+                        <mat-placeholder>Gender</mat-placeholder>
+                        <mat-select formControlName="gender">
+                          <mat-option value="male">Male</mat-option>
+                          <mat-option value="female">Female</mat-option>
+                          <mat-option value="others">Others</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </td>
+                    <td>
+                      <button (click)="doneRow(group)" [disabled]="!group.valid"><mat-icon>done</mat-icon></button>
+                    </td>
+                    <td>
+                      <input type='hidden' formControlName="id">
+                    </td>
+                  </tr>
+                  <tr *ngIf="!group.get('isEditable')!.value">
+                    <td>
+                      {{group.get('name')!.value}}
+                    </td>
+                    <td>
+                      {{group.get('age')!.value}}
+                    </td>
+                    <td>
+                      {{group.get('gender')!.value}}
+                    </td>
+                    <td>
+                      <mat-icon class="edit" (click)="editRow(group)">edit</mat-icon>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    </ng-container>
+  </form>
+</main>
+
+<div class="action-container">
+  <button (click)="load()">load</button>
+  <button mat-raised-button [disabled]="userTable.invalid" type="submit" (click)="submitForm()">Submit</button>
 </div>

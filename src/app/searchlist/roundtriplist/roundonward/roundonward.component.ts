@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {OnewaybookingService} from '../../../Services/onewaybooking.service';
 import {FlightsearchService} from '../../../Services/flightsearch.service';
 import {RoundquerydataService} from '../../../Services/roundquerydata.service';
+import {RoundselectService} from '../roundselect.service';
 
 @Component({
   selector: 'app-roundonward',
@@ -16,7 +17,8 @@ export class RoundonwardComponent implements OnInit {
   // @ts-ignore
   queryData: any; subscription: Subscription; queryResult: any; currorderby; currsort;
   constructor(private odqds: RoundquerydataService, private route: Router,
-              private fs: FlightsearchService, private obs: OnewaybookingService) { }
+              private fs: FlightsearchService,
+              private roundselect: RoundselectService) { }
 
   ngOnInit(): void {
     this.subscription = this.odqds.currentMessage.subscribe( m => this.queryData = m );
@@ -60,7 +62,7 @@ export class RoundonwardComponent implements OnInit {
     }
   }
   pick(flight: any): void{
-    // this.obs.changeMessage(this.queryData, flight);
+    this.roundselect.setOnward(flight);
   }
 
 }

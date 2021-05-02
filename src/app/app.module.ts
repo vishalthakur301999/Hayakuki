@@ -20,7 +20,6 @@ import { TestComponent } from './test/test.component';
 import { AdminflightComponent } from './adminconsole/adminflight/adminflight.component';
 import { AdminflightcreateComponent } from './adminconsole/adminflightcreate/adminflightcreate.component';
 import { AdminflighteditComponent } from './adminconsole/adminflightedit/adminflightedit.component';
-import { Test2Component } from './test/test2/test2.component';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
@@ -30,6 +29,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { RoundtriplistComponent } from './searchlist/roundtriplist/roundtriplist.component';
 import { RoundonwardComponent } from './searchlist/roundtriplist/roundonward/roundonward.component';
 import { RoundreturnComponent } from './searchlist/roundtriplist/roundreturn/roundreturn.component';
+import { RoundtripbookingComponent } from './booking/roundtripbooking/roundtripbooking.component';
 
 @NgModule({
   declarations: [
@@ -47,10 +47,10 @@ import { RoundreturnComponent } from './searchlist/roundtriplist/roundreturn/rou
     AdminflightComponent,
     AdminflightcreateComponent,
     AdminflighteditComponent,
-    Test2Component,
     RoundtriplistComponent,
     RoundonwardComponent,
-    RoundreturnComponent
+    RoundreturnComponent,
+    RoundtripbookingComponent
   ],
     imports: [
         BrowserModule,

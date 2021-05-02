@@ -1,10 +1,17 @@
-import {AfterContentInit, Component, OnInit} from '@angular/core';
+import {AfterContentInit, Component, Injectable, OnInit} from '@angular/core';
 import {AbstractControl, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+import {tickets} from './testdata';
+import {tick} from '@angular/core/testing';
 export interface Iticket{
   id: string;
   name: string;
   age: number;
   gender: string;
+}
+export interface BOBJ{
+  bookingID: string;
+  passCount: number;
 }
 @Component({
   selector: 'app-test',
@@ -12,8 +19,11 @@ export interface Iticket{
   styleUrls: ['./test.component.css', '../../../node_modules/tachyons/css/tachyons.min.css']
 })
 export class TestComponent implements OnInit {
+  ticketsData = tickets;
+  bookingIDs: string[] = [];
+  bookingIDObject: BOBJ[] = [];
   // @ts-ignore
-  userTable: FormGroup; control: FormArray; mode: boolean;
+  userTable: FormGroup; control: FormArray; mode: boolean; parentForm: FormGroup;
   touchedRows: any;
   tickets: Iticket[] = [
     { id: '24h23h23eh2d', name: 'vishal', age: 21, gender: 'male'},
@@ -23,6 +33,22 @@ export class TestComponent implements OnInit {
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    for (const ticketsDatum of this.ticketsData) {
+      if (!this.bookingIDs.includes(ticketsDatum.BookingID)){
+        this.bookingIDs.push(ticketsDatum.BookingID);
+        let passcount = 0;
+        for (const ticketsDatum1 of this.ticketsData) {
+          if (ticketsDatum1.BookingID === ticketsDatum.BookingID){
+            passcount++;
+          }
+        }
+        const temp: BOBJ = {
+          bookingID : ticketsDatum.BookingID,
+          passCount : passcount
+        };
+        this.bookingIDObject.push(temp);
+      }
+    }
     this.touchedRows = [];
     this.userTable = this.fb.group({
       tableRows: this.fb.array([])
@@ -37,7 +63,7 @@ export class TestComponent implements OnInit {
       this.addRow(ticket);
     }
   }
-  initiateForm(passenger: Iticket): FormGroup {
+  initiateForm(passenger: any): FormGroup {
     return this.fb.group({
       name: [passenger.name, Validators.required],
       age: [passenger.age, [Validators.required, Validators.pattern('[0-9]{1,3}'), Validators.min(0), Validators.max(120)]],

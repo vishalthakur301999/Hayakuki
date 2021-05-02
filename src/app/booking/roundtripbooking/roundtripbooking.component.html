@@ -1,19 +1,16 @@
 <main class="flex flex-wrap bg-black">
-  <section class="pa4 bg-black vh-100-ns w-50-m w-30-ns w-100 h-100-ns overflow-y-scroll-ns">
-    <p class="f1 fjalla">{{sourceAirport.city}} &#8594; {{destAirport.city}}</p>
+  <section class="pa4 bg-black vh-100-ns w-50-m w-30-ns w-100 h-100-ns overflow-y-scroll-ns flex flex-column">
+    <p class="f2 fjalla">{{sourceAirport.city}} &#8594; {{destAirport.city}}</p>
     <table class="overviewtable">
       <tr>
-        <td colspan="2"><p class="f3 fjalla">Flight Overview - </p></td>
-      </tr>
-      <tr>
-        <td colspan="2">{{selectedFlight.flight.airline +" "+selectedFlight.flight.flightNumber}}</td>
+        <td colspan="2">{{selectedFlight.onwardflight.airline +" "+selectedFlight.onwardflight.flightNumber}}</td>
       </tr>
       <tr>
         <td colspan="2"><hr></td>
       </tr>
       <tr>
         <td rowspan="2">Departure</td>
-        <td>{{selectedFlight.flight.deptTime}} on {{dformatter(selectedFlight.dot)}}</td>
+        <td>{{selectedFlight.onwardflight.deptTime}} on {{dformatter(selectedFlight.dot)}}</td>
       </tr>
       <tr>
         <td>{{sourceAirport.airportName+", "+sourceAirport.city}}</td>
@@ -23,10 +20,36 @@
       </tr>
       <tr>
         <td rowspan="2">Arrival</td>
-        <td>{{selectedFlight.flight.arrivalTime}} on {{dformatter(selectedFlight.dot)}}</td>
+        <td>{{selectedFlight.onwardflight.arrivalTime}} on {{dformatter(selectedFlight.dot)}}</td>
       </tr>
       <tr>
         <td>{{destAirport.airportName+", "+destAirport.city}}</td>
+      </tr>
+    </table>
+    <p class="f2 fjalla">{{destAirport.city}} &#8594; {{sourceAirport.city}}</p>
+    <table class="overviewtable">
+      <tr>
+        <td colspan="2">{{selectedFlight.returnflight.airline +" "+selectedFlight.returnflight.flightNumber}}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><hr></td>
+      </tr>
+      <tr>
+        <td rowspan="2">Departure</td>
+        <td>{{selectedFlight.returnflight.deptTime}} on {{dformatter(selectedFlight.dor)}}</td>
+      </tr>
+      <tr>
+        <td>{{destAirport.airportName+", "+destAirport.city}}</td>
+      </tr>
+      <tr>
+        <td colspan="2"><hr></td>
+      </tr>
+      <tr>
+        <td rowspan="2">Arrival</td>
+        <td>{{selectedFlight.returnflight.arrivalTime}} on {{dformatter(selectedFlight.dor)}}</td>
+      </tr>
+      <tr>
+        <td>{{sourceAirport.airportName+", "+sourceAirport.city}}</td>
       </tr>
     </table>
   </section>
@@ -56,15 +79,15 @@
       <div class="pa3"></div>
       <span class="f1 fjalla">Luggage</span>
       <div class="pa2"></div>
-      <div *ngIf="selectedFlight.flight.aircraftType === 'narrowbody'">
+      <div *ngIf="selectedFlight.onwardflight.aircraftType === 'narrowbody'">
         <span>One 15Kg Checked-In Baggage and One 7Kg Hand Baggage <br> Allowed Per Person</span>
       </div>
-      <div *ngIf="selectedFlight.flight.aircraftType === 'widebody'">
+      <div *ngIf="selectedFlight.onwardflight.aircraftType === 'widebody'">
         <span>Two 20Kg Checked-In Baggage and One 7Kg Hand Baggage <br> Allowed Per Person <br><br>Visa not provided</span>
       </div>
 
       <div class="pa3"></div>
-        <!--<button type="submit" class="btn btn-success">Submit</button>-->
+      <!--<button type="submit" class="btn btn-success">Submit</button>-->
     </div>
   </section>
   <section class=" pa4 bg-gray w-30-ns w-100-m w-100 vh-100-ns overflow-y-scroll-ns flex flex-column justify-center">
@@ -74,8 +97,12 @@
         <td colspan="2" class="b f3 fjalla">Base Charges</td>
       </tr>
       <tr>
-        <td>Passenger(s) ({{selectedFlight.passengers}} X ₹ {{selectedFlight.flight.fare}})</td>
-        <td>{{selectedFlight.passengers * selectedFlight.flight.fare}}</td>
+        <td>(Onward) Passenger(s) ({{selectedFlight.passengers}} X ₹ {{selectedFlight.onwardflight.fare}})</td>
+        <td>{{selectedFlight.passengers * selectedFlight.onwardflight.fare}}</td>
+      </tr>
+      <tr>
+        <td>(Return) Passenger(s) ({{selectedFlight.passengers}} X ₹ {{selectedFlight.returnflight.fare}})</td>
+        <td>{{selectedFlight.passengers * selectedFlight.returnflight.fare}}</td>
       </tr>
       <tr><td colspan="2"><hr></td>
       </tr>
@@ -83,7 +110,11 @@
         <td colspan="2" class="b f3 fjalla">Other Charges</td>
       </tr>
       <tr>
-        <td>Convenience Charges</td>
+        <td>(Onward) Convenience Charges</td>
+        <td>0</td>
+      </tr>
+      <tr>
+        <td>(Return) Convenience Charges</td>
         <td>0</td>
       </tr>
       <tr><td colspan="2">
@@ -91,7 +122,7 @@
       <tr>
       <tr>
         <td class="b f3 fjalla">Total Amount </td>
-        <td>{{selectedFlight.passengers * selectedFlight.flight.fare}}</td>
+        <td>{{(selectedFlight.passengers * selectedFlight.onwardflight.fare) + (selectedFlight.passengers * selectedFlight.returnflight.fare)}}</td>
       </tr>
       <tr>
     </table>

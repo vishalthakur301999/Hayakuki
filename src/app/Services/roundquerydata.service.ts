@@ -20,6 +20,5 @@ export class RoundquerydataService {
   // tslint:disable-next-line:typedef
   changeMessage(data: any){
     this.messageSource.next(data);
-    console.log(data);
   }
 }

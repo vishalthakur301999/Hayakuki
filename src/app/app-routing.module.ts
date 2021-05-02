@@ -10,8 +10,8 @@ import {OnewaybookingComponent} from './booking/onewaybooking/onewaybooking.comp
 import {BookingsComponent} from './User/bookings/bookings.component';
 import {TestComponent} from './test/test.component';
 import {AdminflightComponent} from './adminconsole/adminflight/adminflight.component';
-import {Test2Component} from './test/test2/test2.component';
 import {RoundtriplistComponent} from './searchlist/roundtriplist/roundtriplist.component';
+import {RoundtripbookingComponent} from './booking/roundtripbooking/roundtripbooking.component';
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -19,11 +19,11 @@ const routes: Routes = [
   {path: 'roundtriplist', component: RoundtriplistComponent},
   {path: 'login', component: LoginComponent},
   {path: 'signup', component: SignupComponent},
-  {path: 'bookings', component: BookingsComponent},
+  {path: 'bookings', component: BookingsComponent, canActivate: [AuthGuard]},
   {path: 'test', component: TestComponent},
-  {path: 'test2', component: Test2Component},
   {path: 'adminflight', component: AdminflightComponent, canActivate: [AuthGuard]},
   {path: 'onewaybooking', component: OnewaybookingComponent, canActivate: [AuthGuard]},
+  {path: 'roundtripbooking', component: RoundtripbookingComponent, canActivate: [AuthGuard]},
   {path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   {path: '', redirectTo: 'home', pathMatch: 'full'}
 ];

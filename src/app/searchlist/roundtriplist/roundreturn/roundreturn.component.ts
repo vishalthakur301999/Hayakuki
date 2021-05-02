@@ -3,6 +3,8 @@ import {RoundquerydataService} from '../../../Services/roundquerydata.service';
 import {FlightsearchService} from '../../../Services/flightsearch.service';
 import {Router} from '@angular/router';
 import {OnewaybookingService} from '../../../Services/onewaybooking.service';
+import {RoundselectService} from '../roundselect.service';
+import {RoundbookingService} from '../../../Services/roundbooking.service';
 
 @Component({
   selector: 'app-roundreturn',
@@ -14,7 +16,8 @@ export class RoundreturnComponent implements OnInit {
   // @ts-ignore
   queryData: any; subscription: Subscription; queryResult: any; currorderby; currsort;
   constructor(private odqds: RoundquerydataService, private route: Router,
-              private fs: FlightsearchService, private obs: OnewaybookingService) { }
+              private fs: FlightsearchService,
+              private roundselect: RoundselectService) { }
 
   ngOnInit(): void {
     this.subscription = this.odqds.currentMessage.subscribe( m => this.queryData = m );
@@ -58,8 +61,6 @@ export class RoundreturnComponent implements OnInit {
     }
   }
   pick(flight: any): void{
-    // this.obs.changeMessage(this.queryData, flight);
+    this.roundselect.setReturn(flight);
   }
-
-
 }

@@ -3,6 +3,8 @@ import {UserDetailsService} from '../../authorization/user-details.service';
 import {Router} from '@angular/router';
 import {SignupService} from '../../authorization/signup.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-profile',
@@ -34,8 +36,11 @@ export class ProfileComponent implements OnInit {
   response: any;
   userdetails: any;
   fieldsetDisabled = true;
-  constructor( private pd: UserDetailsService, private route: Router, private signup: SignupService, private snackBar: MatSnackBar) { }
-
+  posts: any;
+  baseurl = 'https://localhost:5001/api/UserBlogs/';
+  constructor( private pd: UserDetailsService, private route: Router, private signup: SignupService,
+               private snackBar: MatSnackBar, private http: HttpClient) {
+  }
   ngOnInit(): void {
     this.pd.currentMessage.subscribe( e => {
       this.userdetails = e;
@@ -46,7 +51,11 @@ export class ProfileComponent implements OnInit {
       this.gender = this.userdetails.gender;
       this.age = this.userdetails.age;
       this.address = this.userdetails.address;
+      this.fetchAllBLogs(this.username).subscribe( e => this.posts = e);
     });
+  }
+  fetchAllBLogs(uname: string): Observable<object>{
+    return this.http.get(this.baseurl + uname);
   }
   getAge(birthDate: Date): void {
     const today = new Date();
@@ -78,31 +87,31 @@ export class ProfileComponent implements OnInit {
       count++;
     }
     else {
-      alert('Name cannot be Empty');
+      this.openSnackBar('Name Can not be Empty');
     }
     if (this.username !== ''){
       count++;
     }
     else {
-      alert('Username cannot be Empty');
+      this.openSnackBar('Username Can not be Empty');
     }
     if (this.emailcheck() && this.email !== ''){
       count++;
     }
     else{
-      alert('Email can not be empty');
+      this.openSnackBar('Email Can not be Empty');
     }
     if (this.mobilecheck() && this.mobile !== ''){
       count++;
     }
     else{
-      alert('Email can not be empty');
+      this.openSnackBar('Mobile No. Can not be Empty');
     }
     if (this.address !== ''){
       count++;
     }
     else {
-      alert('Address cannot be Empty');
+      this.openSnackBar('Address Can not be Empty');
     }
     if (count === 5){
       return true;

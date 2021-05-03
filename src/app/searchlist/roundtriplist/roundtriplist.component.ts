@@ -16,6 +16,8 @@ export class RoundtriplistComponent implements OnInit {
     this.subscription = this.odqds.currentMessage.subscribe( m => this.queryData = m );
   }
   ngOnInit(): void {
+    this.roundSelect.removeOnward();
+    this.roundSelect.removeReturn();
   }
   onwardSelected(): boolean{
     if (this.roundSelect.checkOnward()){
@@ -47,7 +49,8 @@ export class RoundtriplistComponent implements OnInit {
     this.rbs.changeMessage(this.queryData, this.round, this.returnflight);
   }
   dformatter(d: Date): string{
-    return d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();
+    const temp = d.toString();
+    return temp.substr(0, 10);
   }
   nullCheck(): boolean{
     if (this.round === null || this.returnflight === null){

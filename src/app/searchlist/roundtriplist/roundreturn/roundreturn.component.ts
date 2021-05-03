@@ -12,6 +12,7 @@ import {RoundbookingService} from '../../../Services/roundbooking.service';
   styleUrls: ['./roundreturn.component.css', '../../../../../node_modules/tachyons/css/tachyons.min.css']
 })
 export class RoundreturnComponent implements OnInit {
+  flag = false;
   orderby = 'Fare'; sort = 'asc';
   // @ts-ignore
   queryData: any; subscription: Subscription; queryResult: any; currorderby; currsort;
@@ -21,6 +22,7 @@ export class RoundreturnComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription = this.odqds.currentMessage.subscribe( m => this.queryData = m );
+    this.roundselect.removeReturn();
     if (this.queryData.from === null || this.queryData.to === null){
       this.route.navigate(['home']);
     }else{
@@ -37,8 +39,9 @@ export class RoundreturnComponent implements OnInit {
         this.queryResult = e;
         console.log(this.queryResult);
         if (this.queryResult.length === 0){
-          // this.route.navigate(['home']);
+          this.route.navigate(['home']);
         }
+        this.flag = true;
       });
     }
   }

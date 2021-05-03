@@ -15,7 +15,7 @@ import { SignupComponent } from './User/signup/signup.component';
 import {AuthorizationService} from './authorization/authorization.service';
 import { ProfileComponent } from './User/profile/profile.component';
 import { OnewaybookingComponent } from './booking/onewaybooking/onewaybooking.component';
-import { BookingsComponent } from './User/bookings/bookings.component';
+import {BookingsComponent, TicketEditDialogComponent} from './User/bookings/bookings.component';
 import { TestComponent } from './test/test.component';
 import { AdminflightComponent } from './adminconsole/adminflight/adminflight.component';
 import { AdminflightcreateComponent } from './adminconsole/adminflightcreate/adminflightcreate.component';
@@ -30,6 +30,10 @@ import { RoundtriplistComponent } from './searchlist/roundtriplist/roundtriplist
 import { RoundonwardComponent } from './searchlist/roundtriplist/roundonward/roundonward.component';
 import { RoundreturnComponent } from './searchlist/roundtriplist/roundreturn/roundreturn.component';
 import { RoundtripbookingComponent } from './booking/roundtripbooking/roundtripbooking.component';
+import { BlogComponent } from './blog/blog.component';
+import { BlogPostComponent } from './blog/blog-post/blog-post.component';
+import { BlogeditComponent } from './blog/blogedit/blogedit.component';
+import { BlogcreateComponent } from './blog/blogcreate/blogcreate.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +54,12 @@ import { RoundtripbookingComponent } from './booking/roundtripbooking/roundtripb
     RoundtriplistComponent,
     RoundonwardComponent,
     RoundreturnComponent,
-    RoundtripbookingComponent
+    RoundtripbookingComponent,
+    BlogComponent,
+    BlogPostComponent,
+    BlogeditComponent,
+    BlogcreateComponent,
+    TicketEditDialogComponent
   ],
     imports: [
         BrowserModule,

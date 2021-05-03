@@ -77,7 +77,7 @@
         <a (click)="addQuantity()" class="bg-black pa2 ma1">Add Passenger</a>
       </form>
       <div class="pa3"></div>
-      <span class="f1 fjalla">Luggage</span>
+      <span class="f2 fjalla">Luggage - Onward</span>
       <div class="pa2"></div>
       <div *ngIf="selectedFlight.onwardflight.aircraftType === 'narrowbody'">
         <span>One 15Kg Checked-In Baggage and One 7Kg Hand Baggage <br> Allowed Per Person</span>
@@ -85,7 +85,15 @@
       <div *ngIf="selectedFlight.onwardflight.aircraftType === 'widebody'">
         <span>Two 20Kg Checked-In Baggage and One 7Kg Hand Baggage <br> Allowed Per Person <br><br>Visa not provided</span>
       </div>
-
+      <div class="pa3"></div>
+      <span class="f2 fjalla">Luggage - Return</span>
+      <div class="pa2"></div>
+      <div *ngIf="selectedFlight.returnflight.aircraftType === 'narrowbody'">
+        <span>One 15Kg Checked-In Baggage and One 7Kg Hand Baggage <br> Allowed Per Person</span>
+      </div>
+      <div *ngIf="selectedFlight.returnflight.aircraftType === 'widebody'">
+        <span>Two 20Kg Checked-In Baggage and One 7Kg Hand Baggage <br> Allowed Per Person <br><br>Visa not provided</span>
+      </div>
       <div class="pa3"></div>
       <!--<button type="submit" class="btn btn-success">Submit</button>-->
     </div>
@@ -127,7 +135,7 @@
       <tr>
     </table>
     <div class="flex justify-center">
-      <button mat-raised-button color="primary" class="pa3 ma3 f3 fjalla" (click)="startBooking()">Book Now</button>
+      <button mat-raised-button color="primary" [disabled]="!passengerform.valid" class="pa3 ma3 f3 fjalla" (click)="startBooking()">Book Now</button>
     </div>
 
   </section>

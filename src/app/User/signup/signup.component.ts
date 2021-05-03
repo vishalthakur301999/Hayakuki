@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {SignupService} from '../../authorization/signup.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Observable} from 'rxjs';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -8,6 +10,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./signup.component.css', '../../../../node_modules/tachyons/css/tachyons.min.css']
 })
 export class SignupComponent implements OnInit {
+  unamecheckurl = 'https://localhost:5001/api/UsernameCheckCotroller/';
   hide = true;
   name = '';
   username = '';
@@ -19,8 +22,9 @@ export class SignupComponent implements OnInit {
   bdate = new Date();
   age = 0;
   address = '';
+  unameexist = false;
   // @ts-ignore
-  constructor( private signup: SignupService, private snackBar: MatSnackBar) { }
+  constructor( private signup: SignupService, private snackBar: MatSnackBar, private http: HttpClient) { }
 
   ngOnInit(): void {}
   cpasscheck(): boolean{
@@ -34,6 +38,20 @@ export class SignupComponent implements OnInit {
         return false;
       }
     }
+  }
+  getUname(uname: string): Observable<object>{
+    return this.http.get(this.unamecheckurl + uname);
+  }
+  searchUname(): void{
+    this.getUname(this.username).subscribe(uec => {
+      const res = uec;
+      if (res){
+        this.unameexist = true;
+      }
+      else{
+        this.unameexist = false;
+      }
+      });
   }
   getAge(birthDate: Date): void {
     const today = new Date();
@@ -75,6 +93,12 @@ export class SignupComponent implements OnInit {
     else {
       this.openSnackBar('Name cannot be Empty');
     }
+    if (!this.unameexist){
+      count++;
+    }
+    else{
+      this.openSnackBar('Please Pick another username');
+    }
     if (this.username !== ''){
       count++;
     }
@@ -111,7 +135,7 @@ export class SignupComponent implements OnInit {
     else {
       this.openSnackBar('Address cannot be Empty');
     }
-    if (count === 7){
+    if (count === 8){
       this.getAge(this.bdate);
       this.signup.postNewUser(this.name, this.email, this.username, this.pass, this.mobile, this.age, this.gender, this.address);
     }else{

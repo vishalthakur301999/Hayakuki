@@ -6,7 +6,7 @@
         <div *ngIf="!lgStatus() then navout; else navin"></div>
         <ng-template #navout>
           <a mat-list-item routerLink="home" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">flight_takeoff</mat-icon><span class="pa2">Fly</span></a>
-          <a mat-list-item routerLink="blogs" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">landscape</mat-icon><span class="pa2">Travel Ideas</span></a>
+          <a mat-list-item routerLink="blog-list" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">landscape</mat-icon><span class="pa2">Travel Ideas</span></a>
           <a mat-list-item routerLink="signup" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">person_add</mat-icon><span class="pa2">SignUp</span></a>
           <a mat-list-item routerLink="login" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">login</mat-icon><span class="pa2">Login</span></a>
         </ng-template>
@@ -14,13 +14,14 @@
           <div *ngIf="rolecheck() then roleadmin; else roleuser"></div>
           <ng-template #roleuser>
             <a mat-list-item routerLink="home" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">flight_takeoff</mat-icon><span class="pa2">Fly</span></a>
-            <a mat-list-item routerLink="blogs" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">landscape</mat-icon><span class="pa2">Travel Ideas</span></a>
+            <a mat-list-item routerLink="blog-list" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">landscape</mat-icon><span class="pa2">Travel Ideas</span></a>
             <a mat-list-item routerLink="profile" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">person</mat-icon><span class="pa2">My Profile</span></a>
             <a mat-list-item routerLink="bookings" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">airplane_ticket</mat-icon><span class="pa2">My Bookings</span></a>
             <a mat-list-item (click)="logoutFn()"><mat-icon class="pa2">logout</mat-icon><span class="pa2">Logout</span></a>
           </ng-template>
           <ng-template #roleadmin>
             <a mat-list-item routerLink="adminflight" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">airplane_ticket</mat-icon><span class="pa2">Manage Flights</span></a>
+            <a mat-list-item routerLink="blog-list" routerLinkActive="active" (click)="snav.toggle()"><mat-icon class="pa2">landscape</mat-icon><span class="pa2">Travel Ideas</span></a>
             <a mat-list-item (click)="logoutFn()"><mat-icon class="pa2">logout</mat-icon><span class="pa2">Logout</span></a>
           </ng-template>
           </ng-template>

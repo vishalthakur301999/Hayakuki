@@ -1,85 +1,91 @@
-<div class="min-vh-100 bgbooking">
-  <main class="pa6-ns pa5-m pa3 min-vh-100 bg-black-70">
-    <div class="pt5"></div>
-    <span class="f-6-ns f1 fjalla white pl5-ns pr5-ns pl1-m pr1-m pl2 pr2">My Bookings {{count+"-"+len}}</span>
-    <div class="pt3"></div>
-    <section class="flex flex-column justify-center pl5-ns pr5-ns pl1-m pr1-m">
-      <mat-accordion class="pa2" *ngFor="let booking of bookingIDObject">
-        <mat-expansion-panel class="pa2" >
-          <mat-expansion-panel-header>
-            <mat-panel-title class="f5-ns f5-m f6 tl">
-              {{booking.flight.airline +" "+ booking.flight.flightNumber}}
-            </mat-panel-title>
-            <mat-panel-description class="flex justify-end f5-ns f5-m f6 tr">
-              {{booking.flight.sourceCode +" "+ booking.flight.deptTime}} &#8594;{{booking.flight.destCode +" "+ booking.flight.arrivalTime}} on 29/4/21
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="flex justify-center">
-            <table>
-              <tr>
-                <td>Departure</td>
-                <td>{{booking.flight.deptTime}}</td>
-                <td>{{booking.sourceAirport.airportName + "," + booking.sourceAirport.city +" "+ booking.sourceAirport.airportCode}}</td>
-              </tr>
-              <tr>
-                <td>Arrival</td>
-                <td>{{booking.flight.arrivalTime}}</td>
-                <td>{{booking.destAirport.airportName+ "," +booking.destAirport.city +" "+ booking.destAirport.airportCode}}</td>
-              </tr>
-            </table>
-          </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel class="pa2">
-          <mat-expansion-panel-header>
-            <mat-panel-title class="f5-ns f5-m f6 tl">
-              Passenger Details
-            </mat-panel-title>
-            <mat-panel-description class="flex justify-end f5-ns f5-m f6 tr">
-              View Passenger(s)
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="flex justify-center">
-            <table>
-              <ng-container *ngFor="let ticket of ticketsData;">
-                <tr *ngIf="ticket.bookingId === booking.bookingID">
-                  <td>{{ticket.passengerName}}</td>
-                  <td>{{ticket.passengerAge}}</td>
-                  <td>{{ticket.passengerGender}}</td>
-                  <td><mat-icon>edit</mat-icon></td>
+<div *ngIf="count !== len;else loadbks" class="w-100 vh-100 flex justify-center items-center"><mat-spinner></mat-spinner></div>
+<ng-template #loadbks>
+  <div class="min-vh-100 bgbooking">
+    <main class="pa6-ns pa5-m pa3 min-vh-100 bg-black-70">
+      <div class="pt5"></div>
+      <span class="f-6-ns f1 fjalla white pl5-ns pr5-ns pl1-m pr1-m pl2 pr2">My Bookings</span>
+      <div class="pt3"></div>
+      <section class="flex flex-column justify-center pl5-ns pr5-ns pl1-m pr1-m">
+        <mat-accordion class="pa2" *ngFor="let booking of bookingIDObject">
+          <mat-expansion-panel class="pa2" >
+            <mat-expansion-panel-header  class="pt2 pb2">
+              <mat-panel-title class="f3-ns f3-m f4 tl">
+                {{booking.flight.airline +" "+ booking.flight.flightNumber}}
+              </mat-panel-title>
+              <mat-panel-description class="flex justify-end f3-ns f3-m f4 tr">
+                {{booking.flight.sourceCode +" "+ booking.flight.deptTime}} &#8594;{{booking.flight.destCode +" "+ booking.flight.arrivalTime}} on {{dformatter(booking.travelDate)}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="flex justify-center">
+              <table>
+                <tr>
+                  <td>Departure</td>
+                  <td>{{booking.flight.deptTime}}</td>
+                  <td>{{booking.sourceAirport.airportName + "," + booking.sourceAirport.city +" "+ booking.sourceAirport.airportCode}}</td>
                 </tr>
-              </ng-container>
-            </table>
-          </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel class="pa2">
-          <mat-expansion-panel-header>
-            <mat-panel-title class="f5-ns f5-m f6 tl">
-              Booking Ref. - 673DD8C2
-            </mat-panel-title>
-            <mat-panel-description class="flex justify-end f5-ns f5-m f6 tr">
-              Total Fare - 11999
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <div class="flex flex-column justify-center">
-            <table>
-              <tr>
-                <td>Passenger(s) (1 X ₹ 3493)</td>
-                <td>₹ 3493</td>
-              </tr>
-              <tr>
-                <td>Convenience Charges</td>
-                <td>0</td>
-              </tr>
-              <tr>
-                <td>Total Fare</td>
-                <td>₹ 3493</td>
-              </tr>
-            </table>
-            <button mat-raised-button color="warn" class="pa2">Cancel Booking</button>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </section>
-  </main>
-</div>
+                <tr>
+                  <td>Arrival</td>
+                  <td>{{booking.flight.arrivalTime}}</td>
+                  <td>{{booking.destAirport.airportName+ "," +booking.destAirport.city +" "+ booking.destAirport.airportCode}}</td>
+                </tr>
+              </table>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel class="pa2">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="f5-ns f5-m f6 tl">
+                Passenger Details
+              </mat-panel-title>
+              <mat-panel-description class="flex justify-end f5-ns f5-m f6 tr">
+                {{booking.passCount}} Passenger(s)
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="flex justify-center">
+              <table>
+                <ng-container *ngFor="let ticket of ticketsData;">
+                  <tr *ngIf="ticket.bookingId === booking.bookingID">
+                    <td>{{ticket.passengerName}}</td>
+                    <td>{{ticket.passengerAge}}</td>
+                    <td>{{ticket.passengerGender}}</td>
+                    <td>
+                      <button mat-raised-button (click)="openDialog(ticket)" class="pa1"><mat-icon>edit</mat-icon></button>
+                    </td>
+                  </tr>
+                </ng-container>
+              </table>
+            </div>
+          </mat-expansion-panel>
+          <mat-expansion-panel class="pa2">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="f5-ns f5-m f6 tl">
+                Manage Booking
+              </mat-panel-title>
+              <mat-panel-description class="flex justify-end f5-ns f5-m f6 tr">
+                Total Fare - {{booking.fare}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <div class="flex flex-column justify-center">
+              <table>
+                <tr>
+                  <td>Passenger Fare {{booking.passCount}} x {{booking.flight.fare}} </td>
+                  <td>₹ {{booking.fare}}</td>
+                </tr>
+                <tr>
+                  <td>Convenience Charges</td>
+                  <td>0</td>
+                </tr>
+                <tr>
+                  <td>Total Fare</td>
+                  <td>₹ {{booking.fare}}</td>
+                </tr>
+              </table>
+              <button mat-raised-button color="warn" class="pa2" (click)="initDelete(booking.bookingID)">Cancel Booking</button>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </section>
+    </main>
+  </div>
+</ng-template>
+
 

@@ -12,7 +12,7 @@ import {RoundselectService} from '../roundselect.service';
   styleUrls: ['./roundonward.component.css', '../../../../../node_modules/tachyons/css/tachyons.min.css']
 })
 export class RoundonwardComponent implements OnInit {
-
+  flag = false;
   orderby = 'Fare'; sort = 'asc';
   // @ts-ignore
   queryData: any; subscription: Subscription; queryResult: any; currorderby; currsort;
@@ -22,6 +22,7 @@ export class RoundonwardComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription = this.odqds.currentMessage.subscribe( m => this.queryData = m );
+    this.roundselect.removeOnward();
     if (this.queryData.from === null || this.queryData.to === null){
       this.route.navigate(['home']);
     }else{
@@ -38,8 +39,9 @@ export class RoundonwardComponent implements OnInit {
         this.queryResult = e;
         console.log(this.queryResult);
         if (this.queryResult.length === 0){
-          // this.route.navigate(['home']);
+          this.route.navigate(['home']);
         }
+        this.flag = true;
       });
     }
   }

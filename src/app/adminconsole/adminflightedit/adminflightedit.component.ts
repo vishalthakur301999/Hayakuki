@@ -5,6 +5,7 @@ import {AdminflightService} from '../adminflight/adminflight.service';
 import {AdminflightComponent} from '../adminflight/adminflight.component';
 import {Airport} from '../../home/flightsearch/flightsearch.component';
 import {Observable} from 'rxjs';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface Flight {
   flightNumber: string;
@@ -29,7 +30,7 @@ export class AdminflighteditComponent implements OnInit {
   filteredFlights: Observable<Flight[]>;
   // @ts-ignore
   apFetchServer: object;
-  constructor(private adminDB: AdminflightService, private parent: AdminflightComponent) {
+  constructor(private adminDB: AdminflightService, private parent: AdminflightComponent, private snackBar: MatSnackBar) {
     this.adminDB.getAllFlights().subscribe( e =>
     {
       this.apFetchServer = e;
@@ -60,7 +61,7 @@ export class AdminflighteditComponent implements OnInit {
   onSubmit(): void {
     this.adminDB.postFlight(this.editFlight.value).subscribe(e => {
       const x = e;
-      alert('Created');
+      this.openSnackBar('Created');
       this.parent.ngOnInit();
     });
   }
@@ -92,12 +93,12 @@ export class AdminflighteditComponent implements OnInit {
       if (cfm){
         this.adminDB.delFlight(this.deptCtrl.value).subscribe( e => {
           const result: any = e;
-          alert('Deleted');
+          this.openSnackBar('Deleted');
           this.parent.ngOnInit();
         }, error => {
           const er = error;
           if (er.status === 404){
-            alert('Flight Number does not exist');
+            this.openSnackBar('Flight Number does not exist');
           }
         });
       }
@@ -106,12 +107,12 @@ export class AdminflighteditComponent implements OnInit {
 
   edit(): void{
     this.adminDB.putFlight(this.editFlight.value, this.editFlight.controls.flightNumber.value).subscribe( e => {
-      alert('edited');
+      this.openSnackBar('Edit Successful');
       this.parent.ngOnInit();
     }, error => {
       const er = error;
       if (er.status === 404){
-        alert('Flight Number does not exist');
+        this.openSnackBar('Flight Number does not exist');
       }
     });
   }
@@ -129,5 +130,12 @@ export class AdminflighteditComponent implements OnInit {
         startWith(''),
         map(flight => flight ? this._filterStates(flight) : this.flights.slice())
       );
+  }
+  openSnackBar(message: string): void {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 }

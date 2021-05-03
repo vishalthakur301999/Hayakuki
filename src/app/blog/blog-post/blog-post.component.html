@@ -1,0 +1,23 @@
+<article class="athelas">
+  <div class="cover center" [style.background]="'url('+imgurl+')'">
+    <div class="vh-100 dt w-100 tc white bg-black-70">
+      <div class="dtc v-mid">
+        <h1 class="f1 f-headline-l fw1 i white">{{articletitle}}</h1>
+        <blockquote class="ph0 mh0 measure f4 lh-copy center">
+          <p class="fw1 white-70">
+            {{"by "+ author}}
+          </p>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-center flex-wrap pa3" *ngIf="loginstatus()">
+    <button mat-raised-button color="primary" routerLink="/blog-edit/{{blogid}}" class="pa3 w5-ns w-100-m w-100 ma1">Edit this Post</button>
+  </div>
+  <div class="center measure-wide f5 pv5 lh-copy ph2">
+    <span class="f4 lh-title">Posted by {{author}} on {{posteddate.substr(0,10)}}</span>
+    <p>
+      {{articlecontents}}
+    </p>
+  </div>
+</article>

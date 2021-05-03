@@ -34,7 +34,6 @@
     <div style="padding-top: 50px"></div>
     <div class="container">
       <span class="f1 fjalla">Passengers</span>
-
       <form [formGroup]="passengerform" (ngSubmit)="onSubmit()">
         <table class="" formArrayName="quantities">
           <tr class="pa0" *ngFor="let quantity of quantities().controls; let i=index" [formGroupName]="i">
@@ -96,8 +95,7 @@
       <tr>
     </table>
     <div class="flex justify-center">
-      <button mat-raised-button color="primary" class="pa3 ma3 f3 fjalla" (click)="startBooking()">Book Now</button>
+      <button mat-raised-button color="primary" [disabled]="!passengerform.valid" class="pa3 ma3 f3 fjalla" (click)="startBooking()">Book Now</button>
     </div>
-
   </section>
 </main>

@@ -2,6 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AdminflightService} from '../adminflight/adminflight.service';
 import {AdminflightComponent} from '../adminflight/adminflight.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 
@@ -12,7 +13,7 @@ import {AdminflightComponent} from '../adminflight/adminflight.component';
 })
 export class AdminflightcreateComponent implements OnInit {
   createFlight: FormGroup;
-  constructor(private adminDB: AdminflightService, private parent: AdminflightComponent) {
+  constructor(private adminDB: AdminflightService, private parent: AdminflightComponent, private snackBar: MatSnackBar) {
     this.createFlight = new FormGroup({
       flightNumber: new FormControl('', [Validators.required]),
       sourceCode: new FormControl('', [ Validators.required, Validators.pattern('[A-Z]{3}')]),
@@ -31,8 +32,17 @@ export class AdminflightcreateComponent implements OnInit {
   onSubmit(): void{
     this.adminDB.postFlight(this.createFlight.value).subscribe(e => {
       const x = e;
-      alert('Created');
+      this.openSnackBar('Created');
       this.parent.ngOnInit();
+    }, error => {
+      this.openSnackBar(error.statusText);
+    });
+  }
+  openSnackBar(message: string): void {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
   }
 }

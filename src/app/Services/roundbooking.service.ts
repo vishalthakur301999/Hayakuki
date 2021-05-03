@@ -81,10 +81,9 @@ export class RoundbookingService {
     const returnBID = Guid.create().toString();
     const onwardfare = owq.onwardflight.fare * passcount;
     const returnfare = owq.returnflight.fare * passcount;
-    let count = 1;
+    let count = 0;
     console.log(passengerDetails);
     for (const passenger of passengerDetails.quantities) {
-      count++;
       this.ticketStructure.bookingId = onwardBID;
       this.ticketStructure.userId = temp.userId;
       this.ticketStructure.passengerName = passenger.name;
@@ -94,19 +93,21 @@ export class RoundbookingService {
       this.ticketStructure.seatNumber = '';
       this.ticketStructure.travelDate =  owq.dot;
       this.ticketStructure.bookingAmount = onwardfare;
-      console.log(this.ticketStructure);
       this.dbBooking(this.ticketStructure).subscribe( e => {
-        this.ticketStructure.bookingId = returnBID;
-        this.ticketStructure.flightNumber = owq.returnflight.flightNumber;
-        this.ticketStructure.travelDate = owq.dor;
-        this.ticketStructure.bookingAmount = returnfare;
-        this.dbBooking(this.ticketStructure).subscribe(f => {
-          const st = f;
-          console.log(st);
-          if (count === passcount){
-            this.route.navigate(['bookings']);
-          }
-        });
+              this.ticketStructure.bookingId = returnBID;
+              this.ticketStructure.flightNumber = owq.returnflight.flightNumber;
+              this.ticketStructure.travelDate = owq.dor;
+              this.ticketStructure.bookingAmount = returnfare;
+              this.ticketStructure.userId = temp.userId;
+              this.ticketStructure.passengerName = passenger.name;
+              this.ticketStructure.passengerAge = passenger.age;
+              this.ticketStructure.passengerGender = passenger.gender;
+              this.ticketStructure.seatNumber = '';
+              this.dbBooking(this.ticketStructure).subscribe( f => {
+                const st1 = f;
+                this.openSnackBar('Booking Successful');
+                this.route.navigate(['bookings']);
+          });
       });
     }
   }

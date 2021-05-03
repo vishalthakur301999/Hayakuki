@@ -1,0 +1,27 @@
+<section class="pa5-ns pa3-m pa2">
+  <div class="pa3"></div>
+    <form #createBlogform="ngForm" (ngSubmit)="onSubmit(createBlogform.value)">
+        <div class="f-1-ns f1 fjalla">Create new blogpost</div>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Blog Title</mat-label>
+          <input matInput placeholder="Title" name="title" ngModel>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Blog Content</mat-label>
+          <textarea matInput
+                    name="content"
+                    placeholder="Content"
+                    rows="20"
+                    ngModel>
+          </textarea>
+        </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>Image URL</mat-label>
+        <input matInput placeholder="Paste Image URL" name="imgurl" [(ngModel)]="imgurl">
+      </mat-form-field>
+      <img *ngIf="imgurl !== ''" src="{{imgurl}}" class="w-100 pa2" style="height: 500px" alt="Please Paste Image URL">
+      <div class="flex justify-center">
+        <button mat-raised-button color="primary" class="pa3 w5-ns w-100-m w-100">Submit</button>
+      </div>
+    </form>
+</section>

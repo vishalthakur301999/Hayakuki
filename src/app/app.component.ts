@@ -12,11 +12,13 @@ import {AuthorizationService} from './authorization/authorization.service';
 export class AppComponent implements OnDestroy, OnInit{
   mobileQuery: MediaQueryList;
   mQL: () => void;
-  constructor(private changeDetectorRef: ChangeDetectorRef, private media: MediaMatcher, private auth: AuthorizationService) {
+  constructor(private changeDetectorRef: ChangeDetectorRef, private media: MediaMatcher,
+              private auth: AuthorizationService) {
     this.mobileQuery = this.media.matchMedia('(max-width: 600px)');
     this.mQL = () => this.changeDetectorRef.detectChanges();
   }
   ngOnInit(): void {
+    this.auth.sessionLoginInit();
     this.mobileQuery.addEventListener('change', this.mQL);
   }
 

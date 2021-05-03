@@ -11,6 +11,7 @@ import {OnewaybookingService} from '../../Services/onewaybooking.service';
   styleUrls: ['./onewaylist.component.css', '../../../../node_modules/tachyons/css/tachyons.min.css']
 })
 export class OnewaylistComponent implements OnInit {
+  flag = false;
   orderby = 'Fare'; sort = 'asc';
   // @ts-ignore
   queryData: any; subscription: Subscription; queryResult: any; currorderby; currsort;
@@ -37,6 +38,7 @@ export class OnewaylistComponent implements OnInit {
         if (this.queryResult.length === 0){
           this.route.navigate(['home']);
         }
+        this.flag = true;
       });
     }
   }

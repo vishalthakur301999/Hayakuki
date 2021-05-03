@@ -32,7 +32,8 @@ export class OnewaybookingService {
   baseurl = 'https://localhost:5001/api/Ticket/';
   private messageSource = new BehaviorSubject(this.oneWayQuery);
   currentMessage = this.messageSource.asObservable();
-  constructor( private route: Router, private http: HttpClient, private ud: UserDetailsService, private snackBar: MatSnackBar) { }
+  constructor( private route: Router, private http: HttpClient, private ud: UserDetailsService,
+               private snackBar: MatSnackBar) { }
   // tslint:disable-next-line:typedef
   changeMessage(data: any, flight: any){
     this.oneWayQuery.from = data.from;
@@ -69,6 +70,7 @@ export class OnewaybookingService {
     const currentBID = Guid.create().toString();
     const fare = owq.flight.fare * passcount;
     console.log(passengerDetails);
+    let count = 0;
     for (const passenger of passengerDetails.quantities) {
         this.ticketStructure.bookingId = currentBID;
         this.ticketStructure.userId = temp.userId;
@@ -81,8 +83,12 @@ export class OnewaybookingService {
         this.ticketStructure.bookingAmount = fare;
         console.log(this.ticketStructure);
         this.dbBooking(this.ticketStructure).subscribe( e => {
-          this.openSnackBar('Booking Successful');
-          this.route.navigate(['bookings']);
+          count++;
+          if ( count === passcount){
+            this.openSnackBar('Booking Successful');
+            this.bookingactive = false;
+            this.route.navigate(['bookings']);
+          }
         });
     }
   }

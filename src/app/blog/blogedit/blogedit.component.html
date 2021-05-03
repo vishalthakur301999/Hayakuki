@@ -1,0 +1,29 @@
+<section class="pa5-ns pa3-m pa2">
+  <div class="pa3"></div>
+  <form #createBlogform="ngForm" (ngSubmit)="onSubmit(createBlogform.value)">
+    <div class="f-1-ns f1 fjalla">Edit blogpost</div>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Blog Title</mat-label>
+      <input matInput placeholder="Title" name="title" [(ngModel)]="articletitle">
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Blog Content</mat-label>
+      <textarea matInput
+                name="content"
+                placeholder="Content"
+                rows="20"
+                [(ngModel)]="articlecontents">
+          </textarea>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Image URL</mat-label>
+      <input matInput placeholder="Paste Image URL" name="imgurl" [(ngModel)]="imgurl">
+    </mat-form-field>
+    <img *ngIf="imgurl !== ''" src="{{imgurl}}" class="w-100 pa2" style="height: 500px" alt="Please Paste Image URL">
+  </form>
+    <div class="flex justify-center flex-wrap">
+      <button mat-raised-button color="accent" routerLink="/blog-list" class="pa3 w5-ns w-100-m w-100 ma1">Cancel</button>
+      <button mat-raised-button color="primary" (click)="onSubmit(createBlogform.value)" class="pa3 w5-ns w-100-m w-100 ma1">Save Changes</button>
+      <button mat-raised-button color="warn" (click)="deleteblog()" class="pa3 w5-ns w-100-m w-100 ma1">Delete Post</button>
+    </div>
+</section>

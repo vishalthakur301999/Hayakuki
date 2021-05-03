@@ -33,7 +33,7 @@ export class OnewaybookingComponent{
   newQuantity(): FormGroup {
     return this.fb.group({
       name: new FormControl('', Validators.required),
-      age: new FormControl('', Validators.required),
+      age: new FormControl('', [Validators.required, Validators.min(0), Validators.max(150)]),
       gender: 'Male'
     });
   }
@@ -44,8 +44,10 @@ export class OnewaybookingComponent{
   }
 
   removeQuantity(i: number): void {
-    this.selectedFlight.passengers--;
-    this.quantities().removeAt(i);
+    if (this.selectedFlight.passengers >= 2){
+      this.selectedFlight.passengers--;
+      this.quantities().removeAt(i);
+    }
   }
 
   onSubmit(): void {
@@ -61,7 +63,8 @@ export class OnewaybookingComponent{
     }
   }
   dformatter(d: Date): string{
-    return d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear();
+    const temp = d.toString();
+    return temp.substr(0, 10);
   }
   startBooking(): void{
     this.onewayBooking.bookTicket(this.selectedFlight, this.passengerform.value, this.selectedFlight.passengers);

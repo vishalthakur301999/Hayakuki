@@ -73,18 +73,20 @@ export class FlightsearchComponent implements OnInit {
     }
   }
   roundTripSubmit(data: any): void{
-    if (this.deptCtrl.value !== '' && this.arrivalCtrl.value !== ''){
-      const qdata = {
-        from : this.deptCtrl.value,
-        to : this.arrivalCtrl.value,
-        dot: data.dot,
-        dor: data.dor,
-        passengers: data.count,
-        sortby: 'Fare',
-        sortdirection: 'asc'
-      };
-      this.rtqds.changeMessage(qdata);
-      this.route.navigate(['roundtriplist']);
+    if (data.dor !== '' || this.deptCtrl.value !== '' || this.arrivalCtrl.value !== ''){
+      if (this.deptCtrl.value !== '' && this.arrivalCtrl.value !== ''){
+        const qdata = {
+          from : this.deptCtrl.value,
+          to : this.arrivalCtrl.value,
+          dot: data.dot,
+          dor: data.dor,
+          passengers: data.count,
+          sortby: 'Fare',
+          sortdirection: 'asc'
+        };
+        this.rtqds.changeMessage(qdata);
+        this.route.navigate(['roundtriplist']);
+      }
     }
   }
   private _filterStates(value: string): Airport[] {

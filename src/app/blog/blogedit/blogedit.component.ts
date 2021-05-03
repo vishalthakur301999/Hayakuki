@@ -50,7 +50,7 @@ export class BlogeditComponent implements OnInit {
         blogid : this.blogid,
         articletitle : data.title,
         articlecontents : data.content,
-        author : data.userName,
+        author : this.author,
         posteddate: new Date(),
         imgurl : data.imgurl
       };

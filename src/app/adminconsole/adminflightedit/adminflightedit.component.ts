@@ -48,7 +48,7 @@ export class AdminflighteditComponent implements OnInit {
       flightNumber: new FormControl('', [Validators.required]),
       sourceCode: new FormControl('', [ Validators.required, Validators.pattern('[A-Z]{3}')]),
       destCode: new FormControl('', [ Validators.required, Validators.pattern('[A-Z]{3}')]),
-      airline: new FormControl('', [Validators.required, Validators.pattern('[A-Za-z]{1,}')]),
+      airline: new FormControl('', [Validators.required, Validators.pattern('[A-Za-z ]{1,}')]),
       aircraftType: new FormControl('', [Validators.required, Validators.pattern('[A-Za-z]{1,}')]),
       deptTime: new FormControl('', [Validators.required, Validators.pattern('[0-9:]{5}')]),
       arrivalTime: new FormControl('', [Validators.required, Validators.pattern('[0-9:]{5}')]),

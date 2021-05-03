@@ -88,15 +88,12 @@
     <button mat-raised-button color="primary" routerLink="/blog-create" class="pa3 w5-ns w-100-m w-100 ma1 ">Create a Blog Post</button>
   </div>
   <div class="cf pa2 flex flex-wrap justify-center">
-    <div class="pa2 ma2" style="width: 500px;" *ngFor="let post of posts">
+    <div class="ma3" *ngFor="let post of posts">
       <a routerLink="/blog-post/{{post.blogid}}" class="db link dim tc">
-        <img src="{{post.imgurl}}" alt="{{post.articletitle}}r" style="object-fit: cover;height: 400px" class="db outline black-10 h5 w-100"/>
-        <dl class="mt2 f6 lh-copy">
-          <dt class="clip">{{post.articletitle}}</dt>
-          <dd class="f4 ml0 white truncate w-100">{{post.articletitle}}</dd>
-          <dt class="clip">Artist</dt>
-          <dd class="ml0 gray truncate w-100">By - {{post.author}}</dd>
-        </dl>
+        <img src="{{post.imgurl}}" alt="{{post.articletitle}}" style="object-fit: cover;" class="db outline black-10 customhw"/>
+        <div class="flex justify-center">
+          <div class="pt2 f4 white w5 fjalla">{{post.articletitle}}</div>
+        </div>
       </a>
     </div>
   </div>

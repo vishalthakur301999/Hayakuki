@@ -5,6 +5,7 @@ import {OnewaybookingService} from '../../../Services/onewaybooking.service';
 import {FlightsearchService} from '../../../Services/flightsearch.service';
 import {RoundquerydataService} from '../../../Services/roundquerydata.service';
 import {RoundselectService} from '../roundselect.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-roundonward',
@@ -18,7 +19,7 @@ export class RoundonwardComponent implements OnInit {
   queryData: any; subscription: Subscription; queryResult: any; currorderby; currsort;
   constructor(private odqds: RoundquerydataService, private route: Router,
               private fs: FlightsearchService,
-              private roundselect: RoundselectService) { }
+              private roundselect: RoundselectService,  private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.subscription = this.odqds.currentMessage.subscribe( m => this.queryData = m );
@@ -39,6 +40,7 @@ export class RoundonwardComponent implements OnInit {
         this.queryResult = e;
         console.log(this.queryResult);
         if (this.queryResult.length === 0){
+          this.openSnackBar('Sorry, No Flights Found!');
           this.route.navigate(['home']);
         }
         this.flag = true;
@@ -49,6 +51,7 @@ export class RoundonwardComponent implements OnInit {
     if (this.orderby !== this.currorderby || this.sort !== this.currsort){
       this.subscription = this.odqds.currentMessage.subscribe( m => this.queryData = m );
       if (this.queryData.from === ''){
+        this.openSnackBar('Sorry, No Flights Found!');
         this.route.navigate(['home']);
       }else{
         const qstrct = {
@@ -66,5 +69,11 @@ export class RoundonwardComponent implements OnInit {
   pick(flight: any): void{
     this.roundselect.setOnward(flight);
   }
-
+  openSnackBar(message: string): void {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
 }

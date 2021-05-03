@@ -70,7 +70,6 @@ export class OnewaybookingService {
     const currentBID = Guid.create().toString();
     const fare = owq.flight.fare * passcount;
     console.log(passengerDetails);
-    let count = 0;
     for (const passenger of passengerDetails.quantities) {
         this.ticketStructure.bookingId = currentBID;
         this.ticketStructure.userId = temp.userId;
@@ -83,12 +82,9 @@ export class OnewaybookingService {
         this.ticketStructure.bookingAmount = fare;
         console.log(this.ticketStructure);
         this.dbBooking(this.ticketStructure).subscribe( e => {
-          count++;
-          if ( count === passcount){
-            this.openSnackBar('Booking Successful');
-            this.bookingactive = false;
-            this.route.navigate(['bookings']);
-          }
+          this.openSnackBar('Booking Successful');
+          this.bookingactive = false;
+          this.route.navigate(['bookings']);
         });
     }
   }

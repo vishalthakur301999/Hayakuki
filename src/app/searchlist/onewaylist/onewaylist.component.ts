@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {Subscription} from 'rxjs';
 import {FlightsearchService} from '../../Services/flightsearch.service';
 import {OnewaybookingService} from '../../Services/onewaybooking.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-onewaylist',
@@ -16,7 +17,7 @@ export class OnewaylistComponent implements OnInit {
   // @ts-ignore
   queryData: any; subscription: Subscription; queryResult: any; currorderby; currsort;
   constructor(private odqds: OnewayquerydataService, private route: Router,
-              private fs: FlightsearchService, private obs: OnewaybookingService) { }
+              private fs: FlightsearchService, private obs: OnewaybookingService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.subscription = this.odqds.currentMessage.subscribe( m => this.queryData = m );
@@ -36,6 +37,7 @@ export class OnewaylistComponent implements OnInit {
         this.queryResult = e;
         console.log(this.queryResult);
         if (this.queryResult.length === 0){
+          this.openSnackBar('Sorry, No Flights Found!');
           this.route.navigate(['home']);
         }
         this.flag = true;
@@ -46,6 +48,7 @@ export class OnewaylistComponent implements OnInit {
     if (this.orderby !== this.currorderby || this.sort !== this.currsort){
       this.subscription = this.odqds.currentMessage.subscribe( m => this.queryData = m );
       if (this.queryData.from === ''){
+        this.openSnackBar('Sorry, No Flights Found!');
         this.route.navigate(['home']);
       }else{
         const qstrct = {
@@ -62,5 +65,12 @@ export class OnewaylistComponent implements OnInit {
   }
   pick(flight: any): void{
     this.obs.changeMessage(this.queryData, flight);
+  }
+  openSnackBar(message: string): void {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 }

@@ -9,10 +9,10 @@
         <mat-accordion class="pa2" *ngFor="let booking of bookingIDObject">
           <mat-expansion-panel class="pa2" >
             <mat-expansion-panel-header  class="pt2 pb2">
-              <mat-panel-title class="f3-ns f3-m f4 tl">
+              <mat-panel-title class="f3-ns f4-m f5 tl">
                 {{booking.flight.airline +" "+ booking.flight.flightNumber}}
               </mat-panel-title>
-              <mat-panel-description class="flex justify-end f3-ns f3-m f4 tr">
+              <mat-panel-description class="flex justify-end f3-ns f4-m f5 tr">
                 {{booking.flight.sourceCode +" "+ booking.flight.deptTime}} &#8594;{{booking.flight.destCode +" "+ booking.flight.arrivalTime}} on {{dformatter(booking.travelDate)}}
               </mat-panel-description>
             </mat-expansion-panel-header>

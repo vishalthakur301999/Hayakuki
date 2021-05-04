@@ -111,8 +111,12 @@ export class AuthorizationService {
     this.ud.clear();
     this.loginStatus = false;
     this.userdetails = null;
-    localStorage.removeItem('hayakukish');
-    this.router.navigate(['home']);
+    if (localStorage.getItem('hayakukish') !== null){
+      const temp = localStorage.getItem('hayakukish');
+      localStorage.removeItem('hayakukish');
+      this.delDBSession(temp).subscribe();
+      this.router.navigate(['home']);
+    }
   }
   lgStatus(): boolean{
     if (sessionStorage.getItem('user') != null){
@@ -139,7 +143,7 @@ export class AuthorizationService {
   getSession(id: string): Observable<object> {
     return this.http.get(this.sessionurl + id);
   }
-  delDBSession(id: string): Observable<object> {
+  delDBSession(id: string | null): any {
     return this.http.delete(this.sessionurl + id);
   }
 }

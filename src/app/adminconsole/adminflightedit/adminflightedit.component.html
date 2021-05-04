@@ -16,46 +16,46 @@
 <div class="flex justify-center pa2">
   <button class="pa2 h3 w5" mat-raised-button color="primary" (click)="search()">Fetch</button>
 </div>
-<form class="example-form" [formGroup]="editFlight">
-  <div class="flex flex-wrap pa3">
-    <mat-form-field appearance="outline">
+<form [formGroup]="editFlight">
+  <div class="flex flex-wrap justify-center pa3 w-100">
+    <mat-form-field appearance="outline" class="w5-ns w-40-m w-100">
       <mat-label>Flight Number</mat-label>
       <input matInput placeholder="Flight Number" name="flightNumber" formControlName="flightNumber" value="">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="w5-ns w-40-m w-100">
       <mat-label>Source Code</mat-label>
       <input matInput placeholder="Source Airport Code" name="sourceCode" formControlName="sourceCode" value="">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="w5-ns  w-40-m w-100">
       <mat-label>Destination Code</mat-label>
       <input matInput placeholder="Destination Airport Code" value="" name="destCode" formControlName="destCode">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="w5-ns w-40-m w-100">
       <mat-label>Airline</mat-label>
       <input matInput placeholder="Airline" value="" name="airline" formControlName="airline">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="w5-ns w-40-m w-100">
       <mat-label>Aircraft Type</mat-label>
       <input matInput placeholder="Aircraft Type" value="narrowbody" formControlName="aircraftType" name="aircraftType">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="w5-ns w-40-m w-100">
       <mat-label>Departure Time</mat-label>
       <input matInput placeholder="Departure Time" value="00:00" name="deptTime" formControlName="deptTime">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="w5-ns w-40-m w-100">
       <mat-label>Arrival Time</mat-label>
       <input matInput placeholder="Arrival Time" value="00:00" name="arrivalTime" formControlName="arrivalTime">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="w5-ns w-40-m w-100">
       <mat-label>Duration</mat-label>
       <input matInput placeholder="Duration" value="" name="duration" formControlName="duration">
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" class="w5-ns w-40-m w-100">
       <mat-label>Fare</mat-label>
       <input type="number" matInput placeholder="Fare" value="" name="fare" formControlName="fare">
     </mat-form-field>
   </div>
-  <div class="flex justify-center pb4">
+  <div class="flex justify-center pb4 pa2">
     <button class="pa2 h3 w5 ma1" mat-raised-button color="primary" [disabled]="!editFlight.valid" (click)="edit()">Edit</button>
     <button class="pa2 h3 w5 ma1" mat-raised-button color="warn" [disabled]="!editFlight.valid" (click)="delete()">Delete</button>
     <button class="pa2 h3 w5 ma1" mat-raised-button color="accent" (click)="refresh()">Refresh</button>

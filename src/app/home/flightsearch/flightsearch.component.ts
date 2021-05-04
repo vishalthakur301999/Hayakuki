@@ -6,6 +6,7 @@ import {OnewayquerydataService} from '../../Services/onewayquerydata.service';
 import {Router} from '@angular/router';
 import {AirportfetchService} from '../../Services/airportfetch.service';
 import {RoundquerydataService} from '../../Services/roundquerydata.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface Airport {
   city: string;
@@ -34,7 +35,7 @@ export class FlightsearchComponent implements OnInit {
   apFetchServer: object;
   airports: Airport[] = [];
   constructor( private odqds: OnewayquerydataService, private route: Router,
-               private airportService: AirportfetchService, private rtqds: RoundquerydataService ) {
+               private airportService: AirportfetchService, private rtqds: RoundquerydataService, private snackBar: MatSnackBar ) {
     this.minDate = new Date();
     this.airportService.getAllAirports().subscribe( e =>
     {
@@ -59,7 +60,7 @@ export class FlightsearchComponent implements OnInit {
   ngOnInit(): void {
   }
   oneWaySubmit(data: any): void{
-    if (this.deptCtrl.value !== '' && this.arrivalCtrl.value !== ''){
+    if (this.deptCtrl.value !== '' && this.arrivalCtrl.value !== '' && this.deptCtrl.value !== this.arrivalCtrl.value){
       const qdata = {
         from : this.deptCtrl.value,
         to : this.arrivalCtrl.value,
@@ -70,10 +71,12 @@ export class FlightsearchComponent implements OnInit {
       };
       this.odqds.changeMessage(qdata);
       this.route.navigate(['onewaylist']);
+    }else{
+      this.openSnackBar('Please check your inputs');
     }
   }
   roundTripSubmit(data: any): void{
-    if (data.dor !== '' || this.deptCtrl.value !== '' || this.arrivalCtrl.value !== ''){
+    if (data.dor !== '' && this.deptCtrl.value !== '' && this.arrivalCtrl.value !== '' && this.deptCtrl.value !== this.arrivalCtrl.value){
       if (this.deptCtrl.value !== '' && this.arrivalCtrl.value !== ''){
         const qdata = {
           from : this.deptCtrl.value,
@@ -86,12 +89,21 @@ export class FlightsearchComponent implements OnInit {
         };
         this.rtqds.changeMessage(qdata);
         this.route.navigate(['roundtriplist']);
+      }else{
+        this.openSnackBar('Please check your inputs');
       }
     }
   }
   private _filterStates(value: string): Airport[] {
     const filterValue = value.toLowerCase();
     return this.airports.filter(airport => (airport.city.toLowerCase() + airport.airportCode.toLowerCase()).includes(filterValue));
+  }
+  openSnackBar(message: string): void {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 }
 

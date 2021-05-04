@@ -5,21 +5,21 @@
       <div class="h5 w5 bg-black ma1 flex justify-center items-center inline-flex">
         <table class="w-100">
           <tr>
-            <td colspan="2" class="f3-ns f5 fjalla white pa2-ns pa1">{{round.sourceCode}} - {{round.destCode}} ({{dformatter(queryData.dot)}})</td>
+            <td colspan="2" class="f3-ns f5 fjalla white pa2-ns pa1-m pcustom">{{round.sourceCode}} - {{round.destCode}} ({{dformatter(queryData.dot)}})</td>
           </tr>
           <tr>
-            <td colspan="2" class="f4-ns f6 fjalla white pa2-ns pa1">{{round.airline}} {{round.flightNumber}}</td>
+            <td colspan="2" class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">{{round.airline}} {{round.flightNumber}}</td>
           </tr>
           <tr>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">Departure</td>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">{{round.deptTime}}</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">Departure</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m">{{round.deptTime}}</td>
           </tr>
           <tr>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">Arrival</td>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">{{round.arrivalTime}}</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">Arrival</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">{{round.arrivalTime}}</td>
           </tr>
           <tr>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">Fare {{round.fare}}</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">Fare {{round.fare}}</td>
             <td><a (click)="removeOnward()"><mat-icon>delete</mat-icon></a></td>
           </tr>
         </table>
@@ -30,21 +30,21 @@
       <div class="h5 w5 bg-black ma1 flex justify-center items-center inline-flex">
         <table class="w-100">
           <tr>
-            <td colspan="2" class="f3-ns f5 fjalla white pa2-ns pa1">{{returnflight.sourceCode}} - {{returnflight.destCode}} ({{dformatter(queryData.dor)}})</td>
+            <td colspan="2" class="f3-ns f5 fjalla white pa2-ns pa1-m pcustom">{{returnflight.sourceCode}} - {{returnflight.destCode}} ({{dformatter(queryData.dor)}})</td>
           </tr>
           <tr>
-            <td colspan="2" class="f4-ns f6 fjalla white pa2-ns pa1">{{returnflight.airline}} {{returnflight.flightNumber}}</td>
+            <td colspan="2" class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">{{returnflight.airline}} {{returnflight.flightNumber}}</td>
           </tr>
           <tr>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">Departure</td>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">{{returnflight.deptTime}}</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">Departure</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m">{{returnflight.deptTime}}</td>
           </tr>
           <tr>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">Arrival</td>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">{{returnflight.arrivalTime}}</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">Arrival</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">{{returnflight.arrivalTime}}</td>
           </tr>
           <tr>
-            <td class="f4-ns f6 fjalla white pa2-ns pa1">Fare {{returnflight.fare}}</td>
+            <td class="f4-ns f6 fjalla white pa2-ns pa1-m pcustom">Fare {{returnflight.fare}}</td>
             <td><a (click)="removeReturn()"><mat-icon>delete</mat-icon></a></td>
           </tr>
         </table>
